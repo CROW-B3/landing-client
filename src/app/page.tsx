@@ -7,7 +7,7 @@ export default function HomePage() {
     <>
       <AnimatedBackground />
       <Logo />
-      <div className="flex h-screen w-screen flex-col items-center justify-center overflow-hidden">
+      <div className="flex h-screen w-screen flex-col items-center justify-center overflow-hidden" style={{ paddingBottom: '15vh' }}>
         <HeroText />
         <Subtitle />
       </div>

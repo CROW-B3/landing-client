@@ -1,12 +1,16 @@
+'use client'
+
+import { AnimatedBackground, HeroText, Logo, Subtitle } from '@b3-crow/ui-kit'
+
 export default function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold">Welcome</h1>
-        <p className="mt-4 text-lg text-gray-600">
-          Your landing page is ready to be built.
-        </p>
+    <>
+      <AnimatedBackground />
+      <Logo />
+      <div className="flex h-screen w-screen flex-col items-center justify-center overflow-hidden">
+        <HeroText />
+        <Subtitle />
       </div>
-    </div>
+    </>
   )
 }

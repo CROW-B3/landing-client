@@ -4,10 +4,10 @@ import { AnimatedBackground, HeroText, Logo, Subtitle, TypewriterText } from '@b
 
 export default function HomePage() {
   return (
-    <>
+    <div onDragStart={(e) => e.preventDefault()}>
       <AnimatedBackground />
-      <Logo src="/favicon.webp" alt="CROW Logo" />
-      <div className="flex h-screen w-screen flex-col items-center justify-center overflow-hidden" style={{ paddingBottom: '15vh' }}>
+      <Logo src="/favicon.webp" alt="CROW Logo"/>
+      <div className="flex h-screen w-screen flex-col items-center justify-center overflow-hidden select-none pb-[15vh]">
         <HeroText text="CROW"/>
         <TypewriterText text="COMING SOON" />
         <Subtitle>
@@ -16,6 +16,6 @@ export default function HomePage() {
           blending superior reasoning with extensive pretraining knowledge.
         </Subtitle>
       </div>
-    </>
-  ) 
+    </div>
+  )
 }

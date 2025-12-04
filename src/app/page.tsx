@@ -7,7 +7,7 @@ export default function HomePage() {
     <div onDragStart={(e) => e.preventDefault()}>
       <AnimatedBackground />
       <Logo src="/favicon.webp" alt="CROW Logo"/>
-      <div className="flex h-screen w-screen flex-col items-center justify-center overflow-hidden select-none" style={{ paddingBottom: '15vh' }}>
+      <div className="flex h-screen w-screen flex-col items-center justify-center overflow-hidden select-none pb-[15vh]">
         <HeroText text="CROW"/>
         <TypewriterText text="COMING SOON" />
         <Subtitle>

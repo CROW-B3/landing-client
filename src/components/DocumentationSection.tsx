@@ -1,12 +1,11 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { DocumentationCard } from './DocumentationCard'
+import { Card, Button, SectionLabel } from '@b3-crow/ui-kit'
 import Particles from './Particles'
-import { TbLockCode } from "react-icons/tb";
-import { MdApi } from "react-icons/md";
-import { MdOutlineDeveloperBoard } from "react-icons/md";
-import { RiCodeBoxLine } from "react-icons/ri";
+import { TbLockCode } from "react-icons/tb"
+import { MdApi } from "react-icons/md"
+import { MdOutlineDeveloperBoard } from "react-icons/md"
+import { RiCodeBoxLine } from "react-icons/ri"
 
 export function DocumentationSection() {
   const docs = [
@@ -38,7 +37,6 @@ export function DocumentationSection() {
 
   return (
     <section id="documentation" className="relative min-h-screen w-full flex items-center justify-center px-8 py-20 bg-black">
-      {/* Particles Background */}
       <div className="absolute inset-0 w-full h-full">
         <Particles
           particleColors={['#292B5F', '#292B5F']}
@@ -52,33 +50,25 @@ export function DocumentationSection() {
         />
       </div>
 
-      {/* Content */}
       <div className="max-w-7xl w-full relative z-10">
-        {/* Label */}
-        <motion.div
-          className="text-white/40 text-sm font-mono tracking-wider mb-16"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          [ DOCUMENTATIONS ]
-        </motion.div>
+        <SectionLabel label="DOCUMENTATIONS" className="mb-16" />
 
-        {/* Documentation Cards - Connected with vertical dividers */}
         <div className="max-w-6xl mx-auto">
           <div className="overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
               {docs.map((doc, index) => (
-                <DocumentationCard
+                <Card
                   key={doc.title}
                   title={doc.title}
                   description={doc.description}
-                  buttonText={doc.buttonText}
                   icon={doc.icon}
                   index={index}
                   isFirst={index === 0}
                   isLast={index === docs.length - 1}
+                  layout="documentation"
+                  contentAlign="center"
+                  descriptionClassName="text-white/60"
+                  button={<Button variant="outline">{doc.buttonText}</Button>}
                 />
               ))}
             </div>

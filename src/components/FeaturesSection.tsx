@@ -1,7 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { FeatureCard } from './FeatureCard'
+import { Card, Button, SectionLabel } from '@b3-crow/ui-kit'
 import Image from 'next/image'
 
 export function FeaturesSection() {
@@ -50,23 +49,13 @@ export function FeaturesSection() {
   return (
     <section id="features" className="relative min-h-screen w-full flex items-center justify-center px-8 py-20 bg-black">
       <div className="max-w-7xl w-full">
-        {/* Label */}
-        <motion.div
-          className="text-white/40 text-sm font-mono tracking-wider mb-16"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          [ FEATURES ]
-        </motion.div>
+        <SectionLabel label="FEATURES" className="mb-16" />
 
-        {/* Feature Cards - Connected with vertical dividers */}
         <div className="max-w-6xl mx-auto">
           <div className="overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-3">
               {features.map((feature, index) => (
-                <FeatureCard
+                <Card
                   key={feature.title}
                   title={feature.title}
                   description={feature.description}
@@ -74,6 +63,13 @@ export function FeaturesSection() {
                   index={index}
                   isFirst={index === 0}
                   isLast={index === features.length - 1}
+                  layout="feature"
+                  descriptionClassName="text-[#CDAAFF]"
+                  button={
+                    <div className="mt-5">
+                      <Button variant="outline">Try Now</Button>
+                    </div>
+                  }
                 />
               ))}
             </div>

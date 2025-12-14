@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-	/* config options here */
+	transpilePackages: ['@b3-crow/ui-kit'],
 };
 
 export default nextConfig;

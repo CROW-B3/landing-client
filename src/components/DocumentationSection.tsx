@@ -1,0 +1,90 @@
+'use client'
+
+import { motion } from 'framer-motion'
+import { DocumentationCard } from './DocumentationCard'
+import Particles from './Particles'
+import { TbLockCode } from "react-icons/tb";
+import { MdApi } from "react-icons/md";
+import { MdOutlineDeveloperBoard } from "react-icons/md";
+import { RiCodeBoxLine } from "react-icons/ri";
+
+export function DocumentationSection() {
+  const docs = [
+    {
+      title: 'Developer Docs',
+      description: 'Get start in minutes with our integration guide and example calls.',
+      buttonText: 'View Guide',
+      icon: <TbLockCode className="w-12 h-12" />,
+    },
+    {
+      title: 'API References',
+      description: 'Comprehensive list of endpoints, parameters, and responses.',
+      buttonText: 'Explore API',
+      icon: <MdApi className="w-12 h-12" />,
+    },
+    {
+      title: 'Auth & Security',
+      description: 'How to securely authenticate with our system and manage access.',
+      buttonText: 'Auth Docs',
+      icon: <MdOutlineDeveloperBoard className="w-12 h-12" />,
+    },
+    {
+      title: 'SDK & Libraries',
+      description: 'Installable package and helper libraries for Node.js, Python, etc.',
+      buttonText: 'View SDKs',
+      icon: <RiCodeBoxLine className="w-12 h-12" />,
+    },
+  ]
+
+  return (
+    <section id="documentation" className="relative min-h-screen w-full flex items-center justify-center px-8 py-20 bg-black">
+      {/* Particles Background */}
+      <div className="absolute inset-0 w-full h-full">
+        <Particles
+          particleColors={['#292B5F', '#292B5F']}
+          particleCount={200}
+          particleSpread={10}
+          speed={0.1}
+          particleBaseSize={100}
+          moveParticlesOnHover={true}
+          alphaParticles={false}
+          disableRotation={false}
+        />
+      </div>
+
+      {/* Content */}
+      <div className="max-w-7xl w-full relative z-10">
+        {/* Label */}
+        <motion.div
+          className="text-white/40 text-sm font-mono tracking-wider mb-16"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          [ DOCUMENTATIONS ]
+        </motion.div>
+
+        {/* Documentation Cards - Connected with vertical dividers */}
+        <div className="max-w-6xl mx-auto">
+          <div className="overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+              {docs.map((doc, index) => (
+                <DocumentationCard
+                  key={doc.title}
+                  title={doc.title}
+                  description={doc.description}
+                  buttonText={doc.buttonText}
+                  icon={doc.icon}
+                  index={index}
+                  isFirst={index === 0}
+                  isLast={index === docs.length - 1}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

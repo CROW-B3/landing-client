@@ -1,21 +1,21 @@
 'use client'
 
-import { AnimatedBackground, HeroText, Logo, Subtitle, TypewriterText } from '@b3-crow/ui-kit'
+import { Navigation } from '@/components/Navigation'
+import { HeroSection } from '@/components/HeroSection'
+import { AboutSection } from '@/components/AboutSection'
+import { FeaturesSection } from '@/components/FeaturesSection'
+import { DocumentationSection } from '@/components/DocumentationSection'
+import { Footer } from '@/components/Footer'
 
 export default function HomePage() {
   return (
     <div onDragStart={(e) => e.preventDefault()}>
-      <AnimatedBackground />
-      <Logo src="/favicon.webp" alt="CROW Logo"/>
-      <div className="flex h-screen w-screen flex-col items-center justify-center overflow-hidden select-none pb-[15vh]">
-        <HeroText text="CROW"/>
-        <TypewriterText text="COMING SOON" />
-        <Subtitle>
-          We are thrilled to unveil CROW, our most advanced model yet,
-          <br />
-          blending superior reasoning with extensive pretraining knowledge.
-        </Subtitle>
-      </div>
+      <Navigation />
+      <HeroSection />
+      <AboutSection />
+      <FeaturesSection />
+      <DocumentationSection />
+      <Footer />
     </div>
   )
 }

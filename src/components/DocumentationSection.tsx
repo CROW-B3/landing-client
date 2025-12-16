@@ -2,38 +2,19 @@
 
 import { Card, Button, SectionLabel } from '@b3-crow/ui-kit'
 import Particles from './Particles'
-import { TbLockCode } from "react-icons/tb"
-import { MdApi } from "react-icons/md"
-import { MdOutlineDeveloperBoard } from "react-icons/md"
-import { RiCodeBoxLine } from "react-icons/ri"
 
-export function DocumentationSection() {
-  const docs = [
-    {
-      title: 'Developer Docs',
-      description: 'Get start in minutes with our integration guide and example calls.',
-      buttonText: 'View Guide',
-      icon: <TbLockCode className="w-12 h-12" />,
-    },
-    {
-      title: 'API References',
-      description: 'Comprehensive list of endpoints, parameters, and responses.',
-      buttonText: 'Explore API',
-      icon: <MdApi className="w-12 h-12" />,
-    },
-    {
-      title: 'Auth & Security',
-      description: 'How to securely authenticate with our system and manage access.',
-      buttonText: 'Auth Docs',
-      icon: <MdOutlineDeveloperBoard className="w-12 h-12" />,
-    },
-    {
-      title: 'SDK & Libraries',
-      description: 'Installable package and helper libraries for Node.js, Python, etc.',
-      buttonText: 'View SDKs',
-      icon: <RiCodeBoxLine className="w-12 h-12" />,
-    },
-  ]
+export interface DocItem {
+  title: string
+  description: string
+  buttonText: string
+  icon: React.ReactNode
+}
+
+export interface DocumentationSectionProps {
+  docs: DocItem[]
+}
+
+export function DocumentationSection({ docs }: DocumentationSectionProps) {
 
   return (
     <section id="documentation" className="relative min-h-screen w-full flex items-center justify-center px-8 py-20 bg-black">

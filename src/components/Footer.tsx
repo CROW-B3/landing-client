@@ -70,8 +70,8 @@ export function Footer() {
 
           <div>
             <h3 className="text-white font-semibold mb-4">Contact Us</h3>
-            <a href="mailto:CROW.B3@Gmail.com" className="text-white/60 hover:text-white transition-colors text-sm">
-              Email: CROW.B3@Gmail.com
+            <a href="mailto:b3@bbyb.dev" className="text-white/60 hover:text-white transition-colors text-sm">
+              Email: b3@bbyb.dev
             </a>
           </div>
 

@@ -1,10 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Globe } from './Globe'
-import { GradientBackground } from '@b3-crow/ui-kit'
+import { GradientBackground, Globe } from '@b3-crow/ui-kit'
 
-interface AboutSectionProps {
+export interface AboutSectionProps {
   label?: string
   title?: string
   subtitle?: string

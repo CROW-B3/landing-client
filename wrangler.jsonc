@@ -1,6 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "opennext-cloudflare-template",
+  "name": "crow-landing-client",
+  "account_id": "8f0203259905d8923687286c84921e6c",
   "main": ".open-next/worker.js",
   "compatibility_date": "2025-03-01",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
@@ -14,22 +15,44 @@
   "d1_databases": [
     {
       "binding": "DB_MAIN",
-      "database_name": "main",
-      "database_id": "YOUR_DATABASE_ID_HERE",
+      "database_name": "crow-landing-client-db",
+      "database_id": "144acd91-0888-4e60-b160-4b2260ac71ee",
     },
   ],
   "r2_buckets": [
     {
       "binding": "R2_BUCKET",
-      "bucket_name": "my-storage-bucket",
+      "bucket_name": "crow-landing-client-assets",
     },
   ],
   "kv_namespaces": [
     {
       "binding": "NEXT_INC_CACHE_KV",
-      "id": "4a56541b414e480681a887e3547f888f",
-      "remote": true,
+      "id": "5de59b6655254c048ac1bccde2190c4d",
     },
   ],
   "placement": { "mode": "smart" },
+  "env": {
+    "dev": {
+      "d1_databases": [
+        {
+          "binding": "DB_MAIN",
+          "database_name": "crow-landing-client-db-dev",
+          "database_id": "2be2e67e-3ce8-4bb8-821c-2fd7891632f4",
+        },
+      ],
+      "r2_buckets": [
+        {
+          "binding": "R2_BUCKET",
+          "bucket_name": "crow-landing-client-assets-dev",
+        },
+      ],
+      "kv_namespaces": [
+        {
+          "binding": "NEXT_INC_CACHE_KV",
+          "id": "7863efdaa9c347e2bbd5bb303b88635a",
+        },
+      ],
+    },
+  },
 }

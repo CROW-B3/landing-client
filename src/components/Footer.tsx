@@ -79,14 +79,18 @@ export function Footer() {
             <h3 className="text-white font-semibold mb-4">Connect</h3>
             <div className="flex gap-4">
               <a
-                href="#"
+                href="https://www.instagram.com/crow_b3?igsh=N2xldXY3aGN0N3Jr"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-white/60 hover:text-white transition-colors"
                 aria-label="Instagram"
               >
                 <FaInstagram className="w-5 h-5" />
               </a>
               <a
-                href="#"
+                href="https://www.facebook.com/share/1EjusvyjRn/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-white/60 hover:text-white transition-colors"
                 aria-label="Facebook"
               >

@@ -46,13 +46,7 @@ export function AboutSection({
                 </div>
 
                 <p className="text-[#CDAAFFD2] text-2xl leading-relaxed max-w-xl">
-                  Unifies website analytics, CCTV
-                  <br />
-                  insights, and social feedback into one
-                  <br />
-                  model - showing real shopper
-                  <br />
-                  behaviour across every channel.
+                  {description}
                 </p>
               </div>
             </div>

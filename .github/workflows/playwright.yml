@@ -10,15 +10,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    # 1. Set up Bun instead of Node
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v1
       with:
-        node-version: lts/*
+        bun-version: latest
+    # 2. Configure authentication for GitHub Packages (for @b3-crow/ui-kit)
+    - name: Configure npm for GitHub Packages
+      run: |
+        echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_PACKAGES_TOKEN }}" >> ~/.npmrc
+        echo "@b3-crow:registry=https://npm.pkg.github.com" >> ~/.npmrc
+    # 3. Install dependencies with bun (replacing pnpm)
     - name: Install dependencies
-      run: npm install -g pnpm && pnpm install
+      run: bun install --frozen-lockfile
+    # 4. Install Playwright browsers using bun
     - name: Install Playwright Browsers
-      run: pnpm exec playwright install --with-deps
+      run: bunx playwright install --with-deps
+    # 5. Run tests using bun
     - name: Run Playwright tests
-      run: pnpm exec playwright test
+      run: bunx playwright test
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:

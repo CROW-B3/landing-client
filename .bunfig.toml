@@ -2,4 +2,4 @@
 registry = "https://registry.npmjs.org"
 
 [install.scopes]
-"@crow-b3" = { token = "${GITHUB_TOKEN}", url = "https://npm.pkg.github.com" }
+"@b3-crow" = { token = "${GITHUB_TOKEN}", url = "https://npm.pkg.github.com" }

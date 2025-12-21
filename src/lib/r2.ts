@@ -12,15 +12,15 @@ interface R2Config {
 }
 
 function getR2Config(): R2Config {
-  // eslint-disable-next-line dot-notation
+  // eslint-disable-next-line node/prefer-global/process, dot-notation
   const accountId = process.env["CLOUDFLARE_ACCOUNT_ID"];
-  // eslint-disable-next-line dot-notation
+  // eslint-disable-next-line node/prefer-global/process, dot-notation
   const accessKeyId = process.env["CLOUDFLARE_R2_ACCESS_KEY"];
-  // eslint-disable-next-line dot-notation
+  // eslint-disable-next-line node/prefer-global/process, dot-notation
   const secretAccessKey = process.env["CLOUDFLARE_R2_SECRET_ACCESS_KEY"];
-  // eslint-disable-next-line dot-notation
+  // eslint-disable-next-line node/prefer-global/process, dot-notation
   const bucketName = process.env["CLOUDFLARE_R2_STORAGE_BUCKET"];
-  // eslint-disable-next-line dot-notation
+  // eslint-disable-next-line node/prefer-global/process, dot-notation
   const publicUrl = process.env["NEXT_PUBLIC_R2_PUBLIC_URL"];
 
   if (!accountId || !accessKeyId || !secretAccessKey || !bucketName) {
@@ -59,6 +59,7 @@ export function generatePublicUrl(
 }
 
 export async function uploadFile(
+  // eslint-disable-next-line node/prefer-global/buffer
   file: Buffer,
   filePath: string,
 ): Promise<PutObjectCommandOutput> {

@@ -14,9 +14,12 @@ import { defineConfig, devices } from "@playwright/test";
 const config = {
   testDir: "./tests",
   fullyParallel: true,
-  forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  // eslint-disable-next-line node/prefer-global/process, dot-notation
+  forbidOnly: !!process.env["CI"],
+  // eslint-disable-next-line node/prefer-global/process, dot-notation
+  retries: process.env["CI"] ? 2 : 0,
+  // eslint-disable-next-line node/prefer-global/process, dot-notation
+  workers: process.env["CI"] ? 1 : undefined,
   reporter: "html" as const,
   use: {
     trace: "on-first-retry" as const,

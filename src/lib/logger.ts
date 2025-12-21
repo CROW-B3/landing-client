@@ -1,6 +1,5 @@
 import pino from "pino";
 
-// eslint-disable-next-line node/prefer-global/process
 const isDevelopment = process.env.NODE_ENV === "development";
 
 export const logger = pino({

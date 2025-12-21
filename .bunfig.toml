@@ -1,0 +1,5 @@
+[install]
+registry = "https://registry.npmjs.org"
+
+[install.scopes]
+"@crow-b3" = { token = "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", url = "https://npm.pkg.github.com" }

@@ -169,7 +169,9 @@ const Particles: React.FC<ParticlesProps> = ({
       const r = Math.cbrt(Math.random());
       positions.set([x * r, y * r, z * r], i * 3);
       randoms.set([Math.random(), Math.random(), Math.random(), Math.random()], i * 4);
-      const col = hexToRgb(palette[Math.floor(Math.random() * palette.length)]);
+      const colorIndex = Math.floor(Math.random() * palette.length);
+      const hexColor = palette[colorIndex] ?? palette[0]!;
+      const col = hexToRgb(hexColor);
       colors.set(col, i * 3);
     }
 
@@ -205,7 +207,7 @@ const Particles: React.FC<ParticlesProps> = ({
       lastTime = t;
       elapsed += delta * speed;
 
-      program.uniforms.uTime.value = elapsed * 0.001;
+      program.uniforms["uTime"]!.value = elapsed * 0.001;
 
       if (moveParticlesOnHover) {
         particles.position.x = -mouseRef.current.x * particleHoverFactor;
@@ -236,7 +238,6 @@ const Particles: React.FC<ParticlesProps> = ({
         container.removeChild(gl.canvas);
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     particleCount,
     particleSpread,

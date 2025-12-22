@@ -4,18 +4,15 @@ import { drizzle } from "drizzle-orm/d1";
 import { cache } from "react";
 import { logger } from "@/lib/logger";
 import * as schema from "../db/schema";
-import type { CloudflareEnv } from "../../cloudflare-env";
 
 export const getDb = cache(() => {
         try {
-                const { env } = getCloudflareContext<CloudflareEnv>();
-                return drizzle(env.DB_MAIN, {
+                const { env } = getCloudflareContext();
+                return drizzle((env as Cloudflare.Env).DB_MAIN, {
                         schema,
                         logger: true,
                         cache: upstashCache({
-                                 
                                 url: process.env["UPSTASH_URL"]!,
-                                 
                                 token: process.env["UPSTASH_TOKEN"]!,
                                 global: true,
                                 config: { ex: 60 },

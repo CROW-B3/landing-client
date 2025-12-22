@@ -1,0 +1,30 @@
+import { getCloudflareContext } from "@opennextjs/cloudflare";
+import { upstashCache } from "drizzle-orm/cache/upstash";
+import { drizzle } from "drizzle-orm/d1";
+import { cache } from "react";
+import { logger } from "@/lib/logger";
+import * as schema from "../db/schema";
+import type { CloudflareEnv } from "../../cloudflare-env";
+
+export const getDb = cache(() => {
+        try {
+                const { env } = getCloudflareContext<CloudflareEnv>();
+                return drizzle(env.DB_MAIN, {
+                        schema,
+                        logger: true,
+                        cache: upstashCache({
+                                 
+                                url: process.env["UPSTASH_URL"]!,
+                                 
+                                token: process.env["UPSTASH_TOKEN"]!,
+                                global: true,
+                                config: { ex: 60 },
+                        }),
+                });
+        } catch (error) {
+                logger.error({ err: error }, "Cloudflare context not available");
+                throw new Error(
+                        'Database not available. Please run with "wrangler dev" or use "--remote" flag for D1 operations in development.',
+                );
+        }
+});

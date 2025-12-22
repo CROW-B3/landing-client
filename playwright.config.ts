@@ -19,8 +19,14 @@ export default defineConfig({
   ...(process.env["CI"] && { workers: 1 }),
   reporter: "html" as const,
   use: {
-    baseURL: process.env["PLAYWRIGHT_TEST_BASE_URL"] ?? "http://localhost:3000",
+    baseURL: "http://localhost:3000",
     trace: "on-first-retry" as const,
+  },
+  webServer: {
+    command: "bun run dev",
+    url: "http://localhost:3000",
+    reuseExistingServer: !process.env["CI"],
+    timeout: 120000,
   },
   projects: [
     {

@@ -6,31 +6,13 @@ const normalizeSrc = (src: string) => {
 
 export default function cloudflareLoader({
         src,
-        width,
-        quality,
 }: ImageLoaderProps) {
+        // For external URLs, return as-is
         if (src.startsWith("http://") || src.startsWith("https://")) {
                 return src;
         }
 
-        if (process.env.NODE_ENV === "development") {
-                return src;
-        }
-
-        const params = [
-                `width=${width}`,
-                `quality=${quality || 85}`,
-                "format=auto",
-                "fit=scale-down",
-                "metadata=none",
-                "sharpen=1",
-        ];
-
-        if (width <= 640) {
-                params.push("compression=fast");
-        }
-
-        const paramsString = params.join(",");
-
-        return `/cdn-cgi/image/${paramsString}/${normalizeSrc(src)}`;
+        // For local images, just return the path
+        // Images in /public will be served directly by Cloudflare Pages
+        return src;
 }

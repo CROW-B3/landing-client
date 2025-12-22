@@ -19,6 +19,7 @@ export default defineConfig({
   ...(process.env["CI"] && { workers: 1 }),
   reporter: "html" as const,
   use: {
+    baseURL: process.env["PLAYWRIGHT_TEST_BASE_URL"] ?? "http://localhost:3000",
     trace: "on-first-retry" as const,
   },
   projects: [

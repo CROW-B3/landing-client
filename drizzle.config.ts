@@ -8,9 +8,12 @@ export default defineConfig({
         dialect: "sqlite",
         driver: "d1-http",
         dbCredentials: {
-                accountId: process.env.CLOUDFLARE_ACCOUNT_ID!,
-                databaseId: process.env.CLOUDFLARE_DATABASE_ID!,
-                token: process.env.CLOUDFLARE_D1_TOKEN!,
+                // eslint-disable-next-line dot-notation
+                accountId: process.env["CLOUDFLARE_ACCOUNT_ID"]!,
+                // eslint-disable-next-line dot-notation
+                databaseId: process.env["CLOUDFLARE_DATABASE_ID"]!,
+                // eslint-disable-next-line dot-notation
+                token: process.env["CLOUDFLARE_D1_TOKEN"]!,
         },
         out: "./drizzle/migrations",
 });

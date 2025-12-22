@@ -1,41 +1,110 @@
 name: Playwright Tests
+
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
-    branches: [ main, master ]
+    branches: ["*"]
+
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: oven-sh/setup-bun@v2
-      with:
-        bun-version: latest
-    - name: Install dependencies
-      run: bun install
-    - name: Set Cloudflare preview URL
-      id: preview-url
-      run: |
-        # Construct Cloudflare Workers preview URL from commit hash
-        COMMIT_HASH=$(git rev-parse --short HEAD)
-        PREVIEW_URL="https://${COMMIT_HASH}-crow-landing-client.bitbybit-b3.workers.dev"
-        echo "url=$PREVIEW_URL" >> $GITHUB_OUTPUT
-        echo "Testing against: $PREVIEW_URL"
-    - name: Wait for deployment
-      run: |
-        echo "Waiting 30s for Cloudflare deployment to be ready..."
-        sleep 30
-    - name: Install Playwright Browsers
-      run: bun playwright install --with-deps
-    - name: Run Playwright tests
-      run: bun playwright test
-      env:
-        PLAYWRIGHT_TEST_BASE_URL: ${{ steps.preview-url.outputs.url }}
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Fetch latest Cloudflare deployment URL
+        id: preview
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          WORKER_NAME: crow-landing-client
+        run: |
+          # Get current commit SHA and branch
+          COMMIT_SHA="${{ github.sha }}"
+          BRANCH_NAME="${{ github.head_ref || github.ref_name }}"
+
+          echo "Looking for deployment for:"
+          echo "  Branch: $BRANCH_NAME"
+          echo "  Commit: $COMMIT_SHA"
+
+          # Poll for up to 2 minutes to find the deployment
+          for attempt in {1..24}; do
+            echo "🔍 Attempt $attempt/24: Querying Cloudflare deployments API..."
+
+            # List recent deployments for this worker
+            DEPLOYMENTS=$(curl -s -X GET \
+              "https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/workers/scripts/${WORKER_NAME}/deployments" \
+              -H "Authorization: Bearer ${CF_API_TOKEN}" \
+              -H "Content-Type: application/json")
+
+            # Debug: Show API response (first attempt only)
+            if [ $attempt -eq 1 ]; then
+              echo "API Response sample:"
+              echo "$DEPLOYMENTS" | jq -c '.result.items[0:2] // []'
+            fi
+
+            # Try to find deployment matching our commit/branch
+            PREVIEW_URL=$(echo "$DEPLOYMENTS" | jq -r --arg commit "$COMMIT_SHA" --arg branch "$BRANCH_NAME" '
+              .result.items[] |
+              select(
+                (.source.type == "dash" or .source.type == "api") and
+                ((.metadata.commit_hash // "" | contains($commit[0:7])) or
+                 (.metadata.branch // .source.metadata.branch // "" | contains($branch)))
+              ) |
+              .url // .preview_url // .subdomain // empty
+            ' 2>/dev/null | head -1)
+
+            # If URL found, verify and use it
+            if [ -n "$PREVIEW_URL" ] && [ "$PREVIEW_URL" != "null" ]; then
+              # Ensure it's a full URL
+              if [[ ! "$PREVIEW_URL" =~ ^https?:// ]]; then
+                PREVIEW_URL="https://${PREVIEW_URL}.bitbybit-b3.workers.dev"
+              fi
+
+              echo "📍 Found preview URL: $PREVIEW_URL"
+
+              # Verify URL is accessible
+              HTTP_CODE=$(curl -sf -o /dev/null -w "%{http_code}" "$PREVIEW_URL" 2>/dev/null || echo "000")
+              if [[ "$HTTP_CODE" =~ ^[23] ]]; then
+                echo "✅ Preview URL is live and accessible!"
+                echo "url=$PREVIEW_URL" >> $GITHUB_OUTPUT
+                exit 0
+              else
+                echo "⚠️  URL found but not accessible yet (HTTP $HTTP_CODE)"
+              fi
+            fi
+
+            # Wait before retry
+            if [ $attempt -lt 24 ]; then
+              echo "⏳ Waiting 5s for deployment to be ready..."
+              sleep 5
+            fi
+          done
+
+          # Fallback to localhost
+          echo "❌ Could not fetch preview URL from Cloudflare API"
+          echo "⚠️  Falling back to localhost:3000"
+          echo "url=http://localhost:3000" >> $GITHUB_OUTPUT
+
+      - name: Install Playwright browsers
+        run: bun playwright install --with-deps
+
+      - name: Run Playwright tests
+        run: bun playwright test
+        env:
+          PLAYWRIGHT_BASE_URL: ${{ steps.preview.outputs.url }}
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7

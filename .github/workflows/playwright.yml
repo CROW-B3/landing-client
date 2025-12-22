@@ -15,10 +15,24 @@ jobs:
         bun-version: latest
     - name: Install dependencies
       run: bun install
+    - name: Set Cloudflare preview URL
+      id: preview-url
+      run: |
+        # Construct Cloudflare Workers preview URL from commit hash
+        COMMIT_HASH=$(git rev-parse --short HEAD)
+        PREVIEW_URL="https://${COMMIT_HASH}-crow-landing-client.bitbybit-b3.workers.dev"
+        echo "url=$PREVIEW_URL" >> $GITHUB_OUTPUT
+        echo "Testing against: $PREVIEW_URL"
+    - name: Wait for deployment
+      run: |
+        echo "Waiting 30s for Cloudflare deployment to be ready..."
+        sleep 30
     - name: Install Playwright Browsers
       run: bun playwright install --with-deps
     - name: Run Playwright tests
       run: bun playwright test
+      env:
+        PLAYWRIGHT_TEST_BASE_URL: ${{ steps.preview-url.outputs.url }}
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:

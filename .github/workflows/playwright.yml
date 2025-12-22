@@ -15,12 +15,7 @@ jobs:
       uses: oven-sh/setup-bun@v1
       with:
         bun-version: latest
-    # 2. Configure authentication for GitHub Packages (for @b3-crow/ui-kit)
-    - name: Configure npm for GitHub Packages
-      run: |
-        echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_PACKAGES_TOKEN }}" >> ~/.npmrc
-        echo "@b3-crow:registry=https://npm.pkg.github.com" >> ~/.npmrc
-    # 3. Install dependencies with bun (replacing pnpm)
+    # 2. Install dependencies with bun (replacing pnpm)
     - name: Install dependencies
       run: bun install --frozen-lockfile
     # 4. Install Playwright browsers using bun

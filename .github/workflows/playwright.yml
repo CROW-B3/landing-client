@@ -10,25 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: lts/*
+    - uses: oven-sh/setup-bun@v2
     - name: Install dependencies
-      run: |
-        curl -fsSL https://bun.sh/install | bash
-        export BUN_INSTALL="$HOME/.bun"
-        export PATH="$BUN_INSTALL/bin:$PATH"
-        bun install
+      run: bun install
     - name: Install Playwright Browsers
-      run: |
-        export BUN_INSTALL="$HOME/.bun"
-        export PATH="$BUN_INSTALL/bin:$PATH"
-        bun run playwright install --with-deps
+      run: bun run playwright install --with-deps
     - name: Run Playwright tests
-      run: |
-        export BUN_INSTALL="$HOME/.bun"
-        export PATH="$BUN_INSTALL/bin:$PATH"
-        bun run playwright test
+      run: bun run playwright test
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:

@@ -2,6 +2,7 @@
   "name": "next",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "bun@latest",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -10,7 +11,7 @@
     "start": "next start",
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix",
-    "format": "pnpm exec prettier src/ --write",
+    "format": "bun run prettier src/ --write",
     "deploy": "opennextjs-cloudflare build && wrangler deploy",
     "deploy:prod": "opennextjs-cloudflare build && wrangler deploy --env production",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
@@ -34,7 +35,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.703.0",
-    "@crow-b3/ui-kit": "0.0.3",
+    "@b3-crow/ui-kit": "^0.0.27",
     "@opennextjs/cloudflare": "^1.11.0",
     "@typescript-eslint/eslint-plugin": "^8.46.4",
     "@typescript-eslint/parser": "^8.46.4",

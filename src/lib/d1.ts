@@ -12,7 +12,9 @@ export const getDb = cache(() => {
                         schema,
                         logger: true,
                         cache: upstashCache({
+                                 
                                 url: process.env["UPSTASH_URL"]!,
+                                 
                                 token: process.env["UPSTASH_TOKEN"]!,
                                 global: true,
                                 config: { ex: 60 },

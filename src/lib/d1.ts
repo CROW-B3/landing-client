@@ -8,7 +8,7 @@ import * as schema from "../db/schema";
 export const getDb = cache(() => {
         try {
                 const { env } = getCloudflareContext();
-                return drizzle((env as Cloudflare.Env).DB_MAIN, {
+                return drizzle(env.DB_MAIN, {
                         schema,
                         logger: true,
                         cache: upstashCache({

@@ -12,15 +12,10 @@ interface R2Config {
 }
 
 function getR2Config(): R2Config {
-   
   const accountId = process.env["CLOUDFLARE_ACCOUNT_ID"];
-   
   const accessKeyId = process.env["CLOUDFLARE_R2_ACCESS_KEY"];
-   
   const secretAccessKey = process.env["CLOUDFLARE_R2_SECRET_ACCESS_KEY"];
-   
   const bucketName = process.env["CLOUDFLARE_R2_STORAGE_BUCKET"];
-   
   const publicUrl = process.env["NEXT_PUBLIC_R2_PUBLIC_URL"];
 
   if (!accountId || !accessKeyId || !secretAccessKey || !bucketName) {

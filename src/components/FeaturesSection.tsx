@@ -15,12 +15,12 @@ export interface FeaturesSectionProps {
 export function FeaturesSection({ features }: FeaturesSectionProps) {
 
   return (
-    <section id="features" className="relative min-h-screen w-full flex items-center justify-center px-8 py-20 bg-black">
+    <section id="features" className="relative min-h-screen w-full flex items-center justify-center px-8 py-20">
       <div className="max-w-7xl w-full">
         <SectionLabel label="FEATURES" className="mb-16" />
 
         <div className="max-w-6xl mx-auto">
-          <div className="overflow-hidden">
+          <div className="overflow-visible">
             <div className="grid grid-cols-1 md:grid-cols-3">
               {features.map((feature, index) => (
                 <Card

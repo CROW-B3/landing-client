@@ -1,12 +1,11 @@
 'use client'
 
-import { HeroText, Subtitle, AnimatedBackground, InputField } from '@b3-crow/ui-kit'
+import { HeroText, Subtitle, InputField } from '@b3-crow/ui-kit'
 import { IoChevronDown } from 'react-icons/io5'
 
 export function HeroSection() {
   return (
     <section className="relative flex h-screen w-full flex-col items-center justify-center select-none">
-      <AnimatedBackground />
       <div className="flex flex-col items-center gap-8">
         <HeroText text="CROW" />
 

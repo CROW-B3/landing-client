@@ -20,79 +20,52 @@ jobs:
       - name: Install dependencies
         run: bun install
 
-      - name: Fetch latest Cloudflare deployment URL
+      - name: Get Cloudflare preview URL from PR comment
         id: preview
-        env:
-          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
-          WORKER_NAME: crow-landing-client
+        if: github.event_name == 'pull_request'
         run: |
-          # Get current commit SHA and branch
-          COMMIT_SHA="${{ github.sha }}"
-          BRANCH_NAME="${{ github.head_ref || github.ref_name }}"
+          echo "Fetching preview URL from Cloudflare bot comment..."
 
-          echo "Looking for deployment for:"
-          echo "  Branch: $BRANCH_NAME"
-          echo "  Commit: $COMMIT_SHA"
-
-          # Poll for up to 2 minutes to find the deployment
+          # Poll for up to 2 minutes for the bot comment
           for attempt in {1..24}; do
-            echo "🔍 Attempt $attempt/24: Querying Cloudflare deployments API..."
+            echo "🔍 Attempt $attempt/24: Checking for Cloudflare bot comment..."
 
-            # List recent deployments for this worker
-            DEPLOYMENTS=$(curl -s -X GET \
-              "https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/workers/scripts/${WORKER_NAME}/deployments" \
-              -H "Authorization: Bearer ${CF_API_TOKEN}" \
-              -H "Content-Type: application/json")
+            # Fetch PR comments
+            COMMENTS=$(curl -s \
+              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments")
 
-            # Debug: Show API response (first attempt only)
-            if [ $attempt -eq 1 ]; then
-              echo "API Response sample:"
-              echo "$DEPLOYMENTS" | jq -c '.result.items[0:2] // []'
-            fi
-
-            # Try to find deployment matching our commit/branch
-            PREVIEW_URL=$(echo "$DEPLOYMENTS" | jq -r --arg commit "$COMMIT_SHA" --arg branch "$BRANCH_NAME" '
-              .result.items[] |
-              select(
-                (.source.type == "dash" or .source.type == "api") and
-                ((.metadata.commit_hash // "" | contains($commit[0:7])) or
-                 (.metadata.branch // .source.metadata.branch // "" | contains($branch)))
-              ) |
-              .url // .preview_url // .subdomain // empty
+            # Extract preview URL from Cloudflare bot comment
+            PREVIEW_URL=$(echo "$COMMENTS" | jq -r '
+              .[] |
+              select(.user.login == "cloudflare-workers-and-pages[bot]") |
+              .body |
+              match("https://[a-z0-9-]+\\.bitbybit-b3\\.workers\\.dev/?") |
+              .string
             ' 2>/dev/null | head -1)
 
-            # If URL found, verify and use it
-            if [ -n "$PREVIEW_URL" ] && [ "$PREVIEW_URL" != "null" ]; then
-              # Ensure it's a full URL
-              if [[ ! "$PREVIEW_URL" =~ ^https?:// ]]; then
-                PREVIEW_URL="https://${PREVIEW_URL}.bitbybit-b3.workers.dev"
-              fi
-
-              echo "📍 Found preview URL: $PREVIEW_URL"
-
-              # Verify URL is accessible
-              HTTP_CODE=$(curl -sf -o /dev/null -w "%{http_code}" "$PREVIEW_URL" 2>/dev/null || echo "000")
-              if [[ "$HTTP_CODE" =~ ^[23] ]]; then
-                echo "✅ Preview URL is live and accessible!"
-                echo "url=$PREVIEW_URL" >> $GITHUB_OUTPUT
-                exit 0
-              else
-                echo "⚠️  URL found but not accessible yet (HTTP $HTTP_CODE)"
-              fi
+            if [ -n "$PREVIEW_URL" ]; then
+              echo "✅ Found preview URL in bot comment: $PREVIEW_URL"
+              echo "url=$PREVIEW_URL" >> $GITHUB_OUTPUT
+              exit 0
             fi
 
-            # Wait before retry
             if [ $attempt -lt 24 ]; then
-              echo "⏳ Waiting 5s for deployment to be ready..."
+              echo "⏳ Waiting 5s for Cloudflare bot to comment..."
               sleep 5
             fi
           done
 
-          # Fallback to localhost
-          echo "❌ Could not fetch preview URL from Cloudflare API"
-          echo "⚠️  Falling back to localhost:3000"
-          echo "url=http://localhost:3000" >> $GITHUB_OUTPUT
+          echo "❌ No preview URL found after 2 minutes"
+          echo "url=" >> $GITHUB_OUTPUT
+
+      - name: Set preview URL for non-PR runs
+        id: preview-fallback
+        if: github.event_name != 'pull_request'
+        run: |
+          echo "Not a PR, using production URL"
+          echo "url=https://crow-landing-client.bitbybit-b3.workers.dev" >> $GITHUB_OUTPUT
 
       - name: Install Playwright browsers
         run: bun playwright install --with-deps
@@ -100,7 +73,7 @@ jobs:
       - name: Run Playwright tests
         run: bun playwright test
         env:
-          PLAYWRIGHT_BASE_URL: ${{ steps.preview.outputs.url }}
+          PLAYWRIGHT_BASE_URL: ${{ steps.preview.outputs.url || steps.preview-fallback.outputs.url || 'http://localhost:3000' }}
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}

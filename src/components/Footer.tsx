@@ -2,13 +2,10 @@
 
 import Image from 'next/image'
 import { FaInstagram, FaFacebookF, FaLinkedinIn, FaYoutube } from 'react-icons/fa'
-import { GradientBackground } from '@b3-crow/ui-kit'
 
 export function Footer() {
   return (
-    <footer className="relative w-full bg-black px-8 py-12 overflow-hidden">
-      <GradientBackground position="bottom" height="50vh" />
-
+    <footer className="relative w-full px-8 py-12 overflow-hidden">
       <div className="max-w-5xl mx-auto relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8">
           <div className="flex items-start">

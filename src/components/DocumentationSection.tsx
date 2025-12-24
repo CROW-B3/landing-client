@@ -1,7 +1,6 @@
 'use client'
 
 import { Card, Button, SectionLabel } from '@b3-crow/ui-kit'
-import Particles from './Particles'
 
 export interface DocItem {
   title: string
@@ -17,25 +16,12 @@ export interface DocumentationSectionProps {
 export function DocumentationSection({ docs }: DocumentationSectionProps) {
 
   return (
-    <section id="documentation" className="relative min-h-screen w-full flex items-center justify-center px-8 py-20 bg-black">
-      <div className="absolute inset-0 w-full h-full">
-        <Particles
-          particleColors={['#292B5F', '#292B5F']}
-          particleCount={200}
-          particleSpread={10}
-          speed={0.1}
-          particleBaseSize={100}
-          moveParticlesOnHover={true}
-          alphaParticles={false}
-          disableRotation={false}
-        />
-      </div>
-
+    <section id="documentation" className="relative min-h-screen w-full flex items-center justify-center px-8 py-20">
       <div className="max-w-7xl w-full relative z-10">
         <SectionLabel label="DOCUMENTATIONS" className="mb-16" />
 
         <div className="max-w-6xl mx-auto">
-          <div className="overflow-hidden">
+          <div className="overflow-visible">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
               {docs.map((doc, index) => (
                 <Card

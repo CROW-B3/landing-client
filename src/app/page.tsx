@@ -7,6 +7,7 @@ import { FeaturesSection, type FeatureItem } from '@/components/FeaturesSection'
 import { DocumentationSection, type DocItem } from '@/components/DocumentationSection'
 import { Footer } from '@/components/Footer'
 import { aboutContent, featuresData, docsData } from '@/config/content'
+import { AnimatedBackground } from '@b3-crow/ui-kit'
 import Image from 'next/image'
 import { TbLockCode } from 'react-icons/tb'
 import { MdApi, MdOutlineDeveloperBoard } from 'react-icons/md'
@@ -28,7 +29,7 @@ export default function HomePage() {
         alt={feature.imageAlt}
         width={feature.imageWidth}
         height={feature.imageHeight}
-        className="h-auto object-contain opacity-30"
+        className="h-auto object-contain opacity-50 group-hover:opacity-90 transition-opacity duration-500 ease-out"
       />
     ),
   }))
@@ -43,6 +44,7 @@ export default function HomePage() {
 
   return (
     <div onDragStart={(e) => e.preventDefault()}>
+      <AnimatedBackground variant="fullscreen" enableVerticalFade={true} fadeIntensity={0.9} />
       <Navigation />
       <HeroSection />
       <AboutSection {...aboutContent} />

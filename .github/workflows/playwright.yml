@@ -26,9 +26,9 @@ jobs:
         run: |
           echo "Fetching preview URL from Cloudflare bot comment..."
 
-          # Poll for up to 5 minutes for the bot comment
-          for attempt in {1..60}; do
-            echo "🔍 Attempt $attempt/60: Checking for Cloudflare bot comment..."
+          # Poll for up to 2.5 minutes for the bot comment
+          for attempt in {1..30}; do
+            echo "🔍 Attempt $attempt/30: Checking for Cloudflare bot comment..."
 
             # Fetch PR comments
             COMMENTS=$(curl -s \
@@ -40,10 +40,14 @@ jobs:
             BOT_COMMENT=$(echo "$COMMENTS" | jq -r '.[] | select(.user.login == "cloudflare-workers-and-pages[bot]") | .body' 2>/dev/null | head -1)
 
             if [ -n "$BOT_COMMENT" ]; then
+              echo "📝 Found Cloudflare bot comment:"
+              echo "$BOT_COMMENT"
+              echo "---"
+
               # Check if deployment was successful
               if echo "$BOT_COMMENT" | grep -q "Deployment successful"; then
-                # Extract preview URL from successful deployment
-                PREVIEW_URL=$(echo "$BOT_COMMENT" | grep -oP 'https://[a-z0-9-]+\.bitbybit-b3\.workers\.dev/?' | head -1)
+                # Extract preview URL from successful deployment (handles both plain URLs and markdown links)
+                PREVIEW_URL=$(echo "$BOT_COMMENT" | grep -oP 'https://[a-zA-Z0-9-]+\.bitbybit-b3\.workers\.dev[^\s\)]*' | head -1)
 
                 if [ -n "$PREVIEW_URL" ]; then
                   echo "✅ Deployment successful! Preview URL: $PREVIEW_URL"
@@ -57,13 +61,13 @@ jobs:
               fi
             fi
 
-            if [ $attempt -lt 60 ]; then
+            if [ $attempt -lt 30 ]; then
               echo "⏳ Waiting 5s for Cloudflare bot to comment..."
               sleep 5
             fi
           done
 
-          echo "❌ No Cloudflare bot comment found after 5 minutes"
+          echo "❌ No Cloudflare bot comment found after 2.5 minutes"
           echo "url=" >> $GITHUB_OUTPUT
 
       - name: Set preview URL for non-PR runs

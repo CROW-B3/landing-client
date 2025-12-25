@@ -28,9 +28,9 @@ export function Navigation() {
         </a>
       </div>
 
-      <button className="ml-auto px-6 py-2 border border-white/30 rounded-full text-white/90 hover:text-white hover:border-white/50 transition-all text-sm font-medium">
-        Try CROW
-      </button>
+<a href="#" className="ml-auto px-6 py-2 border border-white/30 rounded-full text-white/90 hover:text-white hover:border-white/50 transition-all text-sm font-medium">
+  Try CROW
+</a>
     </nav>
   )
 }

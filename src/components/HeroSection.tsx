@@ -11,7 +11,7 @@ export function HeroSection() {
 
         <InputField
           placeholder="Ask CROW Anything..."
-          onSubmit={(value) => console.log('Submitted:', value)}
+onSubmit={() => { /* TODO: Implement submission logic */ }}
         />
       </div>
 

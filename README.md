@@ -1,1 +1,1 @@
-# Cloudflare OpenNext.js Template
+# Landing Client

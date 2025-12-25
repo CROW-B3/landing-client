@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 
 const nextConfig: NextConfig = {
-	//transpilePackages: ['@b3-crow/ui-kit'],
+	transpilePackages: ['@b3-crow/ui-kit'],
 	trailingSlash: true,
 	generateEtags: true,
 	cacheMaxMemorySize: 0,
@@ -35,6 +35,4 @@ const nextConfig: NextConfig = {
 
 export default nextConfig;
 
-// Enable calling `getCloudflareContext()` in `next dev`.
-// See https://opennext.js.org/cloudflare/bindings#local-access-to-bindings.
 initOpenNextCloudflareForDev();

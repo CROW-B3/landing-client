@@ -1,15 +1,9 @@
 'use client'
 
 import { Card, Button, SectionLabel } from '@b3-crow/ui-kit'
+import type { DocItem } from '@/types'
 
-export interface DocItem {
-  title: string
-  description: string
-  buttonText: string
-  icon: React.ReactNode
-}
-
-export interface DocumentationSectionProps {
+interface DocumentationSectionProps {
   docs: DocItem[]
 }
 

@@ -2,13 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Globe } from '@b3-crow/ui-kit'
-
-export interface AboutSectionProps {
-  label?: string
-  title?: string
-  subtitle?: string
-  description?: string
-}
+import type { AboutSectionProps } from '@/types'
 
 export function AboutSection({
   label = 'ABOUT',

@@ -1,4 +1,4 @@
-import { AboutSectionProps } from '@/components/AboutSection'
+import type { AboutSectionProps } from '@/types'
 
 export const aboutContent: AboutSectionProps = {
   label: 'ABOUT',

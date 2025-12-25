@@ -1,14 +1,9 @@
 'use client'
 
 import { Card, Button, SectionLabel } from '@b3-crow/ui-kit'
+import type { FeatureItem } from '@/types'
 
-export interface FeatureItem {
-  title: string
-  description: string
-  icon: React.ReactNode
-}
-
-export interface FeaturesSectionProps {
+interface FeaturesSectionProps {
   features: FeatureItem[]
 }
 

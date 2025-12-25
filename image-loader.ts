@@ -7,12 +7,9 @@ const normalizeSrc = (src: string) => {
 export default function cloudflareLoader({
         src,
 }: ImageLoaderProps) {
-        // For external URLs, return as-is
         if (src.startsWith("http://") || src.startsWith("https://")) {
                 return src;
         }
 
-        // For local images, just return the path
-        // Images in /public will be served directly by Cloudflare Pages
         return src;
 }

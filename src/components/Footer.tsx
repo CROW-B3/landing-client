@@ -94,7 +94,9 @@ export function Footer() {
                 <FaFacebookF className="w-5 h-5" />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/company/crow-b3"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-white/60 hover:text-white transition-colors"
                 aria-label="LinkedIn"
               >

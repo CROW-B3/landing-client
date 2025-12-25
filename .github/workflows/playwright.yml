@@ -26,9 +26,9 @@ jobs:
         run: |
           echo "Fetching preview URL from Cloudflare bot comment..."
 
-          # Poll for up to 2 minutes for the bot comment
-          for attempt in {1..24}; do
-            echo "🔍 Attempt $attempt/24: Checking for Cloudflare bot comment..."
+          # Poll for up to 5 minutes for the bot comment
+          for attempt in {1..60}; do
+            echo "🔍 Attempt $attempt/60: Checking for Cloudflare bot comment..."
 
             # Fetch PR comments
             COMMENTS=$(curl -s \
@@ -57,13 +57,13 @@ jobs:
               fi
             fi
 
-            if [ $attempt -lt 24 ]; then
+            if [ $attempt -lt 60 ]; then
               echo "⏳ Waiting 5s for Cloudflare bot to comment..."
               sleep 5
             fi
           done
 
-          echo "❌ No Cloudflare bot comment found after 2 minutes"
+          echo "❌ No Cloudflare bot comment found after 5 minutes"
           echo "url=" >> $GITHUB_OUTPUT
 
       - name: Set preview URL for non-PR runs

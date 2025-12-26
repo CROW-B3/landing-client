@@ -15,7 +15,6 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
       gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 1,
-      smoothTouch: false,
       touchMultiplier: 2,
       infinite: false,
     })
@@ -34,7 +33,7 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
         // Check if it's an anchor link on the same page
         if (hash && url.pathname === window.location.pathname) {
           e.preventDefault()
-          const targetElement = document.querySelector(hash)
+          const targetElement = document.querySelector(hash) as HTMLElement
 
           if (targetElement) {
             lenis.scrollTo(targetElement, {

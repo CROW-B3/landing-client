@@ -4,7 +4,7 @@
   "private": true,
   "packageManager": "bun@latest",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "build:cloudflare": "opennextjs-cloudflare build",
     "build:analyze": "ANALYZE=true next build",
@@ -36,8 +36,9 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.703.0",
-    "@b3-crow/ui-kit": "^0.0.30",
+    "@b3-crow/ui-kit": "^0.0.30-pr22.1",
     "@opennextjs/cloudflare": "^1.11.0",
+    "@studio-freight/lenis": "^1.0.42",
     "@typescript-eslint/eslint-plugin": "^8.46.4",
     "@typescript-eslint/parser": "^8.46.4",
     "drizzle-kit": "^0.31.7",

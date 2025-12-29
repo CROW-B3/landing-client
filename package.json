@@ -38,7 +38,7 @@
     "@aws-sdk/client-s3": "^3.703.0",
     "@b3-crow/ui-kit": "^0.0.30-pr22.10",
     "@opennextjs/cloudflare": "^1.11.0",
-    "@studio-freight/lenis": "^1.0.42",
+    "lenis": "^1.1.20",
     "@typescript-eslint/eslint-plugin": "^8.46.4",
     "@typescript-eslint/parser": "^8.46.4",
     "drizzle-kit": "^0.31.7",

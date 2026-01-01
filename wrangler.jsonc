@@ -9,6 +9,7 @@
     "binding": "ASSETS",
     "directory": ".open-next/assets",
   },
+  "logpush": true,
   "observability": {
     "enabled": true,
   },

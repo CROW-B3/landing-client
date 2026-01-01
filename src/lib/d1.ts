@@ -8,13 +8,13 @@ import * as schema from "../db/schema";
 export const getDb = cache(() => {
         try {
                 const { env } = getCloudflareContext();
-                return drizzle((env as any).DB_MAIN, {
+                return drizzle(env.DB_MAIN, {
                         schema,
                         logger: true,
                         cache: upstashCache({
-                                // eslint-disable-next-line dot-notation,node/prefer-global/process
+                                 
                                 url: process.env["UPSTASH_URL"]!,
-                                // eslint-disable-next-line dot-notation,node/prefer-global/process
+                                 
                                 token: process.env["UPSTASH_TOKEN"]!,
                                 global: true,
                                 config: { ex: 60 },

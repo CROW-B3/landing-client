@@ -4,6 +4,7 @@ import { Navigation } from '@/components/Navigation'
 import { HeroSection } from '@/components/HeroSection'
 import { AboutSection } from '@/components/AboutSection'
 import { FeaturesSection } from '@/components/FeaturesSection'
+import { PricingSection } from '@/components/PricingSection'
 import { DocumentationSection } from '@/components/DocumentationSection'
 import { Footer } from '@/components/Footer'
 import { aboutContent, featuresData, docsData } from '@/config/content'
@@ -44,14 +45,17 @@ export default function HomePage() {
   })
 
   return (
-    <div onDragStart={(e) => e.preventDefault()}>
-      <AnimatedBackground variant="fullscreen" enableVerticalFade={true} fadeIntensity={0.9} />
-      <Navigation />
-      <HeroSection />
-      <AboutSection {...aboutContent} />
-      <FeaturesSection features={features} />
-      <DocumentationSection docs={docs} />
-      <Footer />
+    <div onDragStart={(e) => e.preventDefault()} className="overflow-x-hidden relative">
+      <AnimatedBackground variant="fullscreen" enableVerticalFade={true} fadeIntensity={0.9} />\
+      <div className="relative z-10">
+        <Navigation />
+        <HeroSection />
+        <AboutSection {...aboutContent} />
+        <FeaturesSection features={features} />
+        <PricingSection />
+        <DocumentationSection docs={docs} />
+        <Footer />
+      </div>
     </div>
   )
 }

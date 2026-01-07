@@ -16,7 +16,7 @@ export function DocumentationSection({ docs }: DocumentationSectionProps) {
 
         <div className="max-w-6xl mx-auto">
           <div className="overflow-visible">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 responsive-card-grid">
               {docs.map((doc, index) => (
                 <Card
                   key={doc.title}

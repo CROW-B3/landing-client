@@ -5,9 +5,11 @@ import { IoChevronDown } from 'react-icons/io5'
 
 export function HeroSection() {
   return (
-    <section className="relative flex h-screen w-full flex-col items-center justify-center select-none">
-      <div className="flex flex-col items-center gap-8">
-        <HeroText text="CROW" />
+    <section className="relative flex h-screen w-full flex-col items-center justify-center select-none px-4 lg:px-0">
+      <div className="flex flex-col items-center gap-8 w-full lg:w-auto">
+        <div className="scale-50 sm:scale-75 lg:scale-100">
+          <HeroText text="CROW" />
+        </div>
 
         <InputField
           placeholder="Ask CROW Anything..."
@@ -15,11 +17,12 @@ onSubmit={() => { /* TODO: Implement submission logic */ }}
         />
       </div>
 
-      <div className="absolute bottom-24">
+      <div className="absolute bottom-24 px-4">
         <Subtitle>
-          We are thrilled to unveil CROW, our most advanced model yet,
+          <span className="hidden sm:inline">We are thrilled to unveil CROW, our most advanced model yet,
           <br />
-          blending superior reasoning with extensive pretraining knowledge.
+          blending superior reasoning with extensive pretraining knowledge.</span>
+          <span className="sm:hidden text-center">We are thrilled to unveil CROW, our most advanced model yet, blending superior reasoning with extensive pretraining knowledge.</span>
         </Subtitle>
       </div>
 

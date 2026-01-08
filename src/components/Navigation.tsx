@@ -14,6 +14,7 @@ export function Navigation() {
         <>
           <NavLink href="#about">About</NavLink>
           <NavLink href="#features">Features</NavLink>
+          <NavLink href="#pricing">Plans</NavLink>
           <NavLink href="#documentation">Docs</NavLink>
         </>
       }

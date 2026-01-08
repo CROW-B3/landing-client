@@ -11,8 +11,8 @@ export function AboutSection({
   description = 'Unifies website analytics, CCTV insights, and social feedback into one model - showing real shopper behaviour across every channel.',
 }: AboutSectionProps) {
   return (
-    <section id="about" className="relative min-h-screen w-full flex items-center justify-center px-8 py-20 overflow-hidden">
-      <div className="relative z-10 max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section id="about" className="relative min-h-screen w-full flex items-center justify-center px-4 sm:px-8 py-20 overflow-hidden">
+      <div className="relative z-10 max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-16 items-center">
         <motion.div
           className="relative h-full flex flex-col"
           initial={{ opacity: 0, x: -50 }}
@@ -30,15 +30,15 @@ export function AboutSection({
 
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-6xl md:text-7xl font-semibold text-white mb-2">
+                  <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-white mb-2">
                     {title}
                   </h2>
-                  <p className="text-[#6D6D6D] text-sm font-normal tracking-wide">
+                  <p className="text-[#6D6D6D] text-xs sm:text-sm font-normal tracking-wide">
                     {subtitle}
                   </p>
                 </div>
 
-                <p className="text-[#CDAAFFD2] text-2xl leading-relaxed max-w-xl">
+                <p className="text-[#CDAAFFD2] text-lg sm:text-xl md:text-2xl leading-relaxed max-w-xl">
                   {description}
                 </p>
               </div>
@@ -47,13 +47,15 @@ export function AboutSection({
         </motion.div>
 
         <motion.div
-          className="flex items-center justify-center"
+          className="flex items-center justify-center -mt-8 sm:-mt-12 lg:mt-0"
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <Globe />
+          <div className="transform scale-[0.5] sm:scale-[0.7] md:scale-[0.85] lg:scale-100 origin-center">
+            <Globe />
+          </div>
         </motion.div>
       </div>
     </section>

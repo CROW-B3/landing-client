@@ -19,7 +19,7 @@ export function Navigation() {
         </>
       }
       rightContent={
-        <Button variant="outline" href="#">
+        <Button variant="outline" href={process.env['NEXT_PUBLIC_CROW_APP_URL'] || '#'}>
           Try CROW
         </Button>
       }

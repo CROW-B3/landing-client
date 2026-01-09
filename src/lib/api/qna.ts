@@ -1,4 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
+import ky from 'ky'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -17,18 +18,10 @@ interface QueryResponse {
 const API_URL = process.env['NEXT_PUBLIC_API_URL'] || 'http://localhost:8000'
 
 async function sendQuery(request: QueryRequest): Promise<QueryResponse> {
-  const res = await fetch(`${API_URL}/api/v1/qna/query`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+  return ky.post(`${API_URL}/api/v1/qna/query`, {
+    json: request,
     credentials: 'include',
-    body: JSON.stringify(request),
-  })
-
-  if (!res.ok) {
-    throw new Error('Query failed')
-  }
-
-  return res.json()
+  }).json()
 }
 
 export function useQnAQuery() {

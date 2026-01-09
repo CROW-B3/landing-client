@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { AnimatedBackground } from "@b3-crow/ui-kit";
 import { Navigation } from "@/components/Navigation";
@@ -48,7 +48,7 @@ function MessageBubble({ message }: { message: Message }) {
   );
 }
 
-export default function AskPage() {
+function AskPageContent() {
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get("q") || "";
 
@@ -90,6 +90,68 @@ export default function AskPage() {
   };
 
   return (
+    <div className="flex-1 flex flex-col max-w-3xl mx-auto w-full px-4 pt-20 pb-4">
+      <div className="flex-1 overflow-y-auto space-y-4 pb-4">
+        {messages.length === 0 && !isPending && (
+          <div className="flex flex-col items-center justify-center h-full text-center">
+            <h1 className="text-3xl font-bold text-white mb-2">Ask CROW</h1>
+            <p className="text-white/60 max-w-md">
+              Ask anything about CROW, our documentation, or blog posts.
+            </p>
+          </div>
+        )}
+
+        <AnimatePresence mode="popLayout">
+          {messages.map((message, i) => (
+            <MessageBubble key={i} message={message} />
+          ))}
+        </AnimatePresence>
+
+        {isPending && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex justify-start"
+          >
+            <div className="px-4 py-3 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/10">
+              <LoadingDots />
+            </div>
+          </motion.div>
+        )}
+
+        <div />
+      </div>
+
+      <div className="sticky bottom-0 pt-4 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a] to-transparent">
+        <form
+          ref={formRef}
+          onSubmit={handleSubmit}
+          className="flex gap-2 items-center bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-2"
+        >
+          <input
+            ref={inputRef}
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Ask a question..."
+            disabled={isPending}
+            className="flex-1 bg-transparent text-white placeholder-white/40 px-4 py-2 outline-none text-sm"
+          />
+          <button
+            type="submit"
+            disabled={isPending || !input.trim()}
+            className="p-3 bg-purple-600 hover:bg-purple-500 disabled:bg-purple-600/50 disabled:cursor-not-allowed rounded-xl transition-colors"
+          >
+            <IoSend className="w-5 h-5 text-white" />
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+export default function AskPage() {
+  return (
     <div className="min-h-screen flex flex-col relative">
       <AnimatedBackground
         variant="fullscreen"
@@ -100,63 +162,13 @@ export default function AskPage() {
       <div className="relative z-10 flex flex-col h-screen">
         <Navigation />
 
-        <div className="flex-1 flex flex-col max-w-3xl mx-auto w-full px-4 pt-20 pb-4">
-          <div className="flex-1 overflow-y-auto space-y-4 pb-4">
-            {messages.length === 0 && !isPending && (
-              <div className="flex flex-col items-center justify-center h-full text-center">
-                <h1 className="text-3xl font-bold text-white mb-2">Ask CROW</h1>
-                <p className="text-white/60 max-w-md">
-                  Ask anything about CROW, our documentation, or blog posts.
-                </p>
-              </div>
-            )}
-
-            <AnimatePresence mode="popLayout">
-              {messages.map((message, i) => (
-                <MessageBubble key={i} message={message} />
-              ))}
-            </AnimatePresence>
-
-            {isPending && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="flex justify-start"
-              >
-                <div className="px-4 py-3 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/10">
-                  <LoadingDots />
-                </div>
-              </motion.div>
-            )}
-
-            <div />
+        <Suspense fallback={
+          <div className="flex-1 flex items-center justify-center">
+            <LoadingDots />
           </div>
-
-          <div className="sticky bottom-0 pt-4 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a] to-transparent">
-            <form
-              ref={formRef}
-              onSubmit={handleSubmit}
-              className="flex gap-2 items-center bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-2"
-            >
-              <input
-                ref={inputRef}
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask a question..."
-                disabled={isPending}
-                className="flex-1 bg-transparent text-white placeholder-white/40 px-4 py-2 outline-none text-sm"
-              />
-              <button
-                type="submit"
-                disabled={isPending || !input.trim()}
-                className="p-3 bg-purple-600 hover:bg-purple-500 disabled:bg-purple-600/50 disabled:cursor-not-allowed rounded-xl transition-colors"
-              >
-                <IoSend className="w-5 h-5 text-white" />
-              </button>
-            </form>
-          </div>
-        </div>
+        }>
+          <AskPageContent />
+        </Suspense>
       </div>
     </div>
   );

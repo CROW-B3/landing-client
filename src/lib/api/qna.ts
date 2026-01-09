@@ -5,12 +5,6 @@ interface Message {
   content: string
 }
 
-interface Source {
-  title: string
-  url?: string
-  relevance: number
-}
-
 interface QueryRequest {
   query: string
   history?: Message[]
@@ -18,7 +12,6 @@ interface QueryRequest {
 
 interface QueryResponse {
   response: string
-  sources: Source[]
 }
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
@@ -44,4 +37,4 @@ export function useQnAQuery() {
   })
 }
 
-export type { Message, Source, QueryRequest, QueryResponse }
+export type { Message, QueryRequest, QueryResponse }

@@ -7,6 +7,7 @@ import { Navigation } from "@/components/Navigation";
 import { useQnAQuery, type Message } from "@/lib/api/qna";
 import { motion, AnimatePresence } from "framer-motion";
 import { IoSend } from "react-icons/io5";
+import ReactMarkdown from "react-markdown";
 
 function LoadingDots() {
   return (
@@ -42,7 +43,13 @@ function MessageBubble({ message }: { message: Message }) {
             : "bg-white/10 backdrop-blur-sm text-white/90 border border-white/10"
           }`}
       >
-        <p className="whitespace-pre-wrap text-sm">{message.content}</p>
+        {isUser ? (
+          <p className="whitespace-pre-wrap text-sm">{message.content}</p>
+        ) : (
+          <div className="prose prose-invert max-w-none text-sm [&_p]:my-2 [&_li]:my-1 [&_code]:bg-white/10 [&_code]:px-2 [&_code]:py-1 [&_code]:rounded [&_pre]:bg-white/5 [&_pre]:p-3 [&_pre]:rounded">
+            <ReactMarkdown>{message.content}</ReactMarkdown>
+          </div>
+        )}
       </div>
     </motion.div>
   );

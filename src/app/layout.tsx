@@ -10,7 +10,7 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
-	title: "CROW - Coming Soon",
+	title: "CROW",
 	description:
 		"We are thrilled to unveil CROW, our most advanced model yet, blending superior reasoning with extensive pretraining knowledge.",
 };

@@ -14,7 +14,7 @@ interface QueryResponse {
   response: string
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+const API_URL = process.env['NEXT_PUBLIC_API_URL'] || 'http://localhost:8000'
 
 async function sendQuery(request: QueryRequest): Promise<QueryResponse> {
   const res = await fetch(`${API_URL}/api/v1/qna/query`, {

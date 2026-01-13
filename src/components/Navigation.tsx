@@ -19,9 +19,12 @@ export function Navigation() {
         </>
       }
       rightContent={
-        <Button variant="outline" href={process.env['NEXT_PUBLIC_CROW_APP_URL'] || '#'}>
+        <a
+          href={process.env['NEXT_PUBLIC_AUTH_URL'] || '#'}
+          className="rounded-full transition-all font-medium flex items-center justify-center gap-2 whitespace-nowrap border border-white/30 text-white/90 hover:text-white hover:border-white/50 hover:bg-white/5 px-4 py-2.5 text-sm"
+        >
           Try CROW
-        </Button>
+        </a>
       }
       containerClassName="fixed top-0 left-0 right-0 z-50"
       className="px-8 py-4"

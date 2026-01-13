@@ -13,6 +13,9 @@
   "observability": {
     "enabled": true,
   },
+  "vars": {
+    "ENVIRONMENT": "prod",
+  },
   "d1_databases": [
     {
       "binding": "DB_MAIN",
@@ -35,6 +38,9 @@
   "placement": { "mode": "smart" },
   "env": {
     "dev": {
+      "vars": {
+        "ENVIRONMENT": "dev",
+      },
       "d1_databases": [
         {
           "binding": "DB_MAIN",
@@ -54,6 +60,11 @@
           "id": "7863efdaa9c347e2bbd5bb303b88635a",
         },
       ],
+    },
+    "local": {
+      "vars": {
+        "ENVIRONMENT": "local",
+      },
     },
   },
 }

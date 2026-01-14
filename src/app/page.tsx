@@ -1,29 +1,44 @@
 'use client'
 
-import { Navigation } from '@/components/Navigation'
-import { HeroSection } from '@/components/HeroSection'
-import { AboutSection } from '@/components/AboutSection'
-import { FeaturesSection } from '@/components/FeaturesSection'
-import { PricingSection } from '@/components/PricingSection'
-import { DocumentationSection } from '@/components/DocumentationSection'
-import { Footer } from '@/components/Footer'
-import { aboutContent, featuresData, docsData } from '@/config/content'
+import type { DocItem, FeatureItem } from '@/types'
 import { AnimatedBackground } from '@b3-crow/ui-kit'
-import type { FeatureItem, DocItem } from '@/types'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
-import { TbLockCode } from 'react-icons/tb'
 import { MdApi, MdOutlineDeveloperBoard } from 'react-icons/md'
 import { RiCodeBoxLine } from 'react-icons/ri'
+import { TbLockCode } from 'react-icons/tb'
+import { HeroSection } from '@/components/HeroSection'
+import { Navigation } from '@/components/Navigation'
 
+import { aboutContent, docsData, featuresData } from '@/config/content'
+
+const AboutSection = dynamic(() => import('@/components/AboutSection'), {
+  loading: () => <p>Loading...</p>,
+})
+const FeaturesSection = dynamic(() => import('@/components/FeaturesSection'), {
+  loading: () => <p>Loading...</p>,
+})
+const PricingSection = dynamic(() => import('@/components/PricingSection'), {
+  loading: () => <p>Loading...</p>,
+})
+const DocumentationSection = dynamic(
+  () => import('@/components/DocumentationSection'),
+  {
+    loading: () => <p>Loading...</p>,
+  },
+)
+const Footer = dynamic(() => import('@/components/Footer'), {
+  loading: () => <p>Loading...</p>,
+})
 const iconMap = {
-  TbLockCode: TbLockCode,
-  MdApi: MdApi,
-  MdOutlineDeveloperBoard: MdOutlineDeveloperBoard,
-  RiCodeBoxLine: RiCodeBoxLine,
+  TbLockCode,
+  MdApi,
+  MdOutlineDeveloperBoard,
+  RiCodeBoxLine,
 }
 
 export default function HomePage() {
-  const features: FeatureItem[] = featuresData.map((feature) => ({
+  const features: FeatureItem[] = featuresData.map(feature => ({
     ...feature,
     icon: (
       <Image
@@ -45,8 +60,16 @@ export default function HomePage() {
   })
 
   return (
-    <div onDragStart={(e) => e.preventDefault()} className="overflow-x-hidden relative">
-      <AnimatedBackground variant="fullscreen" enableVerticalFade={true} fadeIntensity={0.9} />\
+    <div
+      onDragStart={e => e.preventDefault()}
+      className="overflow-x-hidden relative"
+    >
+      <AnimatedBackground
+        variant="fullscreen"
+        enableVerticalFade={true}
+        fadeIntensity={0.9}
+      />
+      \
       <div className="relative z-10">
         <Navigation />
         <HeroSection />

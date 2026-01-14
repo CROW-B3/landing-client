@@ -16,19 +16,6 @@
   "vars": {
     "ENVIRONMENT": "prod",
   },
-  "d1_databases": [
-    {
-      "binding": "DB_MAIN",
-      "database_name": "crow-landing-client-db",
-      "database_id": "144acd91-0888-4e60-b160-4b2260ac71ee",
-    },
-  ],
-  "r2_buckets": [
-    {
-      "binding": "R2_BUCKET",
-      "bucket_name": "crow-landing-client-assets",
-    },
-  ],
   "kv_namespaces": [
     {
       "binding": "NEXT_INC_CACHE_KV",
@@ -41,19 +28,6 @@
       "vars": {
         "ENVIRONMENT": "dev",
       },
-      "d1_databases": [
-        {
-          "binding": "DB_MAIN",
-          "database_name": "crow-landing-client-db-dev",
-          "database_id": "2be2e67e-3ce8-4bb8-821c-2fd7891632f4",
-        },
-      ],
-      "r2_buckets": [
-        {
-          "binding": "R2_BUCKET",
-          "bucket_name": "crow-landing-client-assets-dev",
-        },
-      ],
       "kv_namespaces": [
         {
           "binding": "NEXT_INC_CACHE_KV",

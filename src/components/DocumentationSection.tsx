@@ -1,16 +1,20 @@
 'use client'
 
-import { Card, Button, SectionLabel } from '@b3-crow/ui-kit'
 import type { DocItem } from '@/types'
+import { Button, Card, SectionLabel } from '@b3-crow/ui-kit'
 
 interface DocumentationSectionProps {
   docs: DocItem[]
 }
 
-export function DocumentationSection({ docs }: DocumentationSectionProps) {
-
+export default function DocumentationSection({
+  docs,
+}: DocumentationSectionProps) {
   return (
-    <section id="documentation" className="relative min-h-screen w-full flex items-center justify-center px-8 py-20">
+    <section
+      id="documentation"
+      className="relative min-h-screen w-full flex items-center justify-center px-8 py-20"
+    >
       <div className="max-w-7xl w-full relative z-10">
         <SectionLabel label="DOCUMENTATIONS" className="mb-16" />
 

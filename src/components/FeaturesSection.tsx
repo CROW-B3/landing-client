@@ -1,14 +1,11 @@
-'use client'
-
-import { Card, Button, SectionLabel } from '@b3-crow/ui-kit'
 import type { FeatureItem } from '@/types'
+import { Button, Card, SectionLabel } from '@b3-crow/ui-kit'
 
 interface FeaturesSectionProps {
   features: FeatureItem[]
 }
 
 export function FeaturesSection({ features }: FeaturesSectionProps) {
-
   return (
     <section id="features" className="relative min-h-screen w-full flex items-center justify-center px-8 py-20">
       <div className="max-w-7xl w-full">
@@ -28,11 +25,11 @@ export function FeaturesSection({ features }: FeaturesSectionProps) {
                   isLast={index === features.length - 1}
                   layout="feature"
                   descriptionClassName="text-[#CDAAFF]"
-                  button={
+                  button={(
                     <div className="mt-5">
                       <Button variant="outline">Try Now</Button>
                     </div>
-                  }
+                  )}
                 />
               ))}
             </div>

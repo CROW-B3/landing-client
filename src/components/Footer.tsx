@@ -1,7 +1,4 @@
-'use client'
-
-import Image from 'next/image'
-import { FaInstagram, FaFacebookF, FaLinkedinIn, FaYoutube } from 'react-icons/fa'
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from 'react-icons/fa'
 
 export function Footer() {
   return (
@@ -9,7 +6,7 @@ export function Footer() {
       <div className="max-w-5xl mx-auto relative z-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 sm:gap-8 mb-6 sm:mb-8">
           <div className="flex items-start justify-center sm:justify-start md:col-span-1">
-            <Image
+            <img
               src="/favicon.webp"
               alt="CROW Logo"
               width={80}

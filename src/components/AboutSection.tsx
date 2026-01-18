@@ -1,8 +1,6 @@
-'use client'
-
-import { motion } from 'framer-motion'
-import { Globe } from '@b3-crow/ui-kit'
 import type { AboutSectionProps } from '@/types'
+import { Globe } from '@b3-crow/ui-kit'
+import { motion } from 'framer-motion'
 
 export function AboutSection({
   label = 'ABOUT',
@@ -21,7 +19,9 @@ export function AboutSection({
           transition={{ duration: 0.8 }}
         >
           <div className="text-white/40 text-sm font-mono tracking-wider mb-12 lg:mb-auto">
-            [{label}]
+            [
+            {label}
+            ]
           </div>
 
           <div className="flex-grow flex flex-col justify-center">

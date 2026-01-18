@@ -1,17 +1,15 @@
-'use client';
+import { PricingCard, SectionLabel, SegmentedControl } from '@b3-crow/ui-kit'
+import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { pricingData } from '@/config/pricing'
 
-import { useState } from 'react';
-import { SegmentedControl, SectionLabel, PricingCard } from '@b3-crow/ui-kit';
-import { pricingData } from '@/config/pricing';
-import { motion } from 'framer-motion';
-
-type BillingPeriod = 'monthly' | 'yearly';
+type BillingPeriod = 'monthly' | 'yearly'
 
 export function PricingSection() {
-  const [billingPeriod, setBillingPeriod] = useState<BillingPeriod>('monthly');
+  const [billingPeriod, setBillingPeriod] = useState<BillingPeriod>('monthly')
 
-  const currentPricing = pricingData[billingPeriod];
-  const period = billingPeriod === 'monthly' ? 'mo' : 'yr';
+  const currentPricing = pricingData[billingPeriod]
+  const period = billingPeriod === 'monthly' ? 'mo' : 'yr'
 
   return (
     <section id="pricing" className="relative min-h-screen w-full flex items-center justify-center px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-20">
@@ -34,7 +32,7 @@ export function PricingSection() {
                   { label: 'Yearly', value: 'yearly' },
                 ]}
                 value={billingPeriod}
-                onChange={(value) => setBillingPeriod(value as BillingPeriod)}
+                onChange={value => setBillingPeriod(value as BillingPeriod)}
                 size="md"
               />
               {billingPeriod === 'yearly' && (
@@ -52,9 +50,9 @@ export function PricingSection() {
           </motion.div>
 
           <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {currentPricing.map((pricing, index) => (
+            {currentPricing.map(pricing => (
               <PricingCard
-                key={index}
+                key={pricing.title}
                 {...pricing}
                 period={period}
               />
@@ -63,5 +61,5 @@ export function PricingSection() {
         </div>
       </div>
     </section>
-  );
+  )
 }

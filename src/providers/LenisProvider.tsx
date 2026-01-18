@@ -1,8 +1,5 @@
-'use client'
-
-import React from 'react'
 import { ReactLenis } from 'lenis/react'
-import 'lenis/dist/lenis.css'
+import React from 'react'
 
 export function LenisProvider({ children }: { children: React.ReactNode }) {
   return (
@@ -20,7 +17,7 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
 
         // Tuning options
         duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        easing: t => Math.min(1, 1.001 - 2 ** (-10 * t)),
         smoothWheel: true,
         wheelMultiplier: 1,
         touchMultiplier: 2,

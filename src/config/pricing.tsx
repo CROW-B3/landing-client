@@ -1,12 +1,12 @@
-import { Video, Globe, MessageSquare } from 'lucide-react';
-import { IoCheckmarkCircleOutline } from 'react-icons/io5';
-import { PiHeadCircuit } from 'react-icons/pi';
-import { MdOutlineTouchApp } from 'react-icons/md';
-import type { PricingCardProps } from '@b3-crow/ui-kit';
+import type { PricingCardProps } from '@b3-crow/ui-kit'
+import { Globe, MessageSquare, Video } from 'lucide-preact'
+import { IoCheckmarkCircleOutline } from 'react-icons/io5'
+import { MdOutlineTouchApp } from 'react-icons/md'
+import { PiHeadCircuit } from 'react-icons/pi'
 
 export const pricingData: {
-  monthly: Omit<PricingCardProps, 'period'>[];
-  yearly: Omit<PricingCardProps, 'period'>[];
+  monthly: Omit<PricingCardProps, 'period'>[]
+  yearly: Omit<PricingCardProps, 'period'>[]
 } = {
   monthly: [
     {
@@ -136,4 +136,4 @@ export const pricingData: {
       checkIcon: <IoCheckmarkCircleOutline className="h-4 w-4" style={{ color: '#8B5CF6' }} />,
     },
   ],
-};
+}

@@ -1,6 +1,5 @@
 import type { AboutSectionProps } from '@/types'
 import { Globe } from '@b3-crow/ui-kit'
-import { motion } from 'framer-motion'
 
 export function AboutSection({
   label = 'ABOUT',
@@ -11,13 +10,7 @@ export function AboutSection({
   return (
     <section id="about" className="relative min-h-screen w-full flex items-center justify-center px-4 sm:px-8 py-20 overflow-hidden">
       <div className="relative z-10 max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-16 items-center">
-        <motion.div
-          className="relative h-full flex flex-col"
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
+        <div className="relative h-full flex flex-col animate-slide-in-left">
           <div className="text-white/40 text-sm font-mono tracking-wider mb-12 lg:mb-auto">
             [
             {label}
@@ -44,19 +37,13 @@ export function AboutSection({
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="flex items-center justify-center -mt-8 sm:-mt-12 lg:mt-0"
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
+        <div className="flex items-center justify-center -mt-8 sm:-mt-12 lg:mt-0 animate-slide-in-right">
           <div className="transform scale-[0.5] sm:scale-[0.7] md:scale-[0.85] lg:scale-100 origin-center">
             <Globe />
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

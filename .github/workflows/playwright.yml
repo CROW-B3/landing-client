@@ -96,18 +96,18 @@ jobs:
           if [ -z "$URL" ]; then
             echo "No preview/production URL found, starting local dev server..."
             echo "use_local=true" >> $GITHUB_OUTPUT
-            echo "url=http://localhost:3000" >> $GITHUB_OUTPUT
+            echo "url=http://localhost:4321" >> $GITHUB_OUTPUT
 
             # Build and start the server in the background
             bun run build
-            bun run start &
+            bun run preview &
             SERVER_PID=$!
             echo "server_pid=$SERVER_PID" >> $GITHUB_OUTPUT
 
             # Wait for server to be ready
             echo "Waiting for server to start..."
             for i in {1..30}; do
-              if curl -s http://localhost:3000 > /dev/null 2>&1; then
+              if curl -s http://localhost:4321 > /dev/null 2>&1; then
                 echo "✅ Server is ready!"
                 break
               fi

@@ -1,3 +1,5 @@
+// TODO: refactor this, and move any reusable componenets to the ui-kit sdk
+
 "use client";
 
 import { useState, useRef, Suspense } from "react";
@@ -57,6 +59,7 @@ function MessageBubble({ message }: { message: Message }) {
 
 function AskPageContent() {
   const searchParams = useSearchParams();
+  // TODO: we need to make it so that this will automatiacally trigger a message instead of filling the input only
   const initialQuery = searchParams.get("q") || "";
 
   const [messages, setMessages] = useState<Message[]>([]);
@@ -69,6 +72,7 @@ function AskPageContent() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // TODO: add min input size validation
     if (!input.trim() || isPending) return;
 
     const userMessage: Message = { role: "user", content: input };
@@ -169,11 +173,13 @@ export default function AskPage() {
       <div className="relative z-10 flex flex-col h-screen">
         <Navigation />
 
-        <Suspense fallback={
-          <div className="flex-1 flex items-center justify-center">
-            <LoadingDots />
-          </div>
-        }>
+        <Suspense
+          fallback={
+            <div className="flex-1 flex items-center justify-center">
+              <LoadingDots />
+            </div>
+          }
+        >
           <AskPageContent />
         </Suspense>
       </div>

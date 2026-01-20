@@ -33,8 +33,14 @@
     },
   ],
   "placement": { "mode": "smart" },
+  "routes": [
+    { "pattern": "crowai.dev", "custom_domain": true }
+  ],
   "env": {
     "dev": {
+      "routes": [
+        { "pattern": "dev.crowai.dev", "custom_domain": true }
+      ],
       "d1_databases": [
         {
           "binding": "DB_MAIN",

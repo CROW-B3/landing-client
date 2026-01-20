@@ -2,8 +2,17 @@
 
 import { HeroText, Subtitle, InputField } from '@b3-crow/ui-kit'
 import { IoChevronDown } from 'react-icons/io5'
+import { useRouter } from 'next/navigation'
 
 export function HeroSection() {
+  const router = useRouter()
+
+  const handleSubmit = (value: string) => {
+    if (value.trim()) {
+      router.push(`/ask?q=${encodeURIComponent(value.trim())}`)
+    }
+  }
+
   return (
     <section className="relative flex h-screen w-full flex-col items-center justify-center select-none px-4 lg:px-0">
       <div className="flex flex-col items-center gap-8 w-full lg:w-auto">
@@ -13,7 +22,7 @@ export function HeroSection() {
 
         <InputField
           placeholder="Ask CROW Anything..."
-onSubmit={() => { /* TODO: Implement submission logic */ }}
+          onSubmit={handleSubmit}
         />
       </div>
 

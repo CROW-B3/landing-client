@@ -6,7 +6,8 @@
   "packageManager": "bun@latest",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "bunx opennextjs-cloudflare build",
+    "deploy": "npx wrangler deploy",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint src/",

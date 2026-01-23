@@ -2,13 +2,9 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "crow-landing-client",
   "account_id": "8f0203259905d8923687286c84921e6c",
-  "main": ".open-next/worker.js",
+  "main": "dist/_worker.js",
   "compatibility_date": "2025-03-01",
-  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
-  "assets": {
-    "binding": "ASSETS",
-    "directory": ".open-next/assets",
-  },
+  "compatibility_flags": ["nodejs_compat"],
   "logpush": true,
   "observability": {
     "enabled": true,
@@ -28,7 +24,7 @@
   ],
   "kv_namespaces": [
     {
-      "binding": "NEXT_INC_CACHE_KV",
+      "binding": "SESSION",
       "id": "5de59b6655254c048ac1bccde2190c4d",
     },
   ],
@@ -56,7 +52,7 @@
       ],
       "kv_namespaces": [
         {
-          "binding": "NEXT_INC_CACHE_KV",
+          "binding": "SESSION",
           "id": "7863efdaa9c347e2bbd5bb303b88635a",
         },
       ],

@@ -1,8 +1,9 @@
-import { defineConfig, devices } from "@playwright/test";
+import process from 'node:process'
+import { defineConfig, devices } from '@playwright/test'
 
 /**
  * Read environment variables from file.
- * https://github.com/motdotla/dotenv
+ * https://github.dev/motdotla/dotenv
  */
 // import dotenv from 'dotenv';
 // import path from 'path';
@@ -12,28 +13,34 @@ import { defineConfig, devices } from "@playwright/test";
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: "./tests",
+  testDir: './tests',
   fullyParallel: true,
-  forbidOnly: !!process.env["CI"],
-  retries: process.env["CI"] ? 2 : 0,
-  ...(process.env["CI"] ? { workers: 1 } : {}),
-  reporter: "html" as const,
+  forbidOnly: !!process.env.CI,
+  retries: process.env.CI ? 2 : 0,
+  ...(process.env.CI ? { workers: 1 } : {}),
+  reporter: 'html' as const,
   use: {
-    baseURL: process.env["PLAYWRIGHT_BASE_URL"] || "http://localhost:3000",
-    trace: "on-first-retry" as const,
+    baseURL: 'http://localhost:3000',
+    trace: 'on-first-retry' as const,
+  },
+  webServer: {
+    command: 'bun run dev',
+    url: 'http://localhost:3000',
+    reuseExistingServer: !process.env.CI,
+    timeout: 120000,
   },
   projects: [
     {
-      name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
     },
     {
-      name: "firefox",
-      use: { ...devices["Desktop Firefox"] },
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
     },
     {
-      name: "webkit",
-      use: { ...devices["Desktop Safari"] },
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
     },
   ],
-});
+})

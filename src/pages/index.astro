@@ -1,0 +1,27 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { AnimatedBackground } from '@b3-crow/ui-kit';
+import { Navigation } from '@/components/Navigation';
+import { HeroSection } from '@/components/HeroSection';
+import { AboutSection } from '@/components/AboutSection';
+import { FeaturesSection } from '@/components/FeaturesSection';
+import { PricingSection } from '@/components/PricingSection';
+import { DocumentationSection } from '@/components/DocumentationSection';
+import Footer from '@/components/Footer.astro';
+import { aboutContent } from '@/config/content';
+---
+
+<Layout title="CROW">
+  <div class="overflow-x-hidden relative" ondragstart="return false">
+    <AnimatedBackground client:only="preact" variant="fullscreen" enableVerticalFade={true} fadeIntensity={0.9} />
+    <div class="relative z-10">
+      <Navigation client:only="preact" />
+      <HeroSection client:only="preact" />
+      <AboutSection client:only="preact" {...aboutContent} />
+      <FeaturesSection client:only="preact" />
+      <PricingSection client:only="preact" />
+      <DocumentationSection client:only="preact" />
+      <Footer />
+    </div>
+  </div>
+</Layout>

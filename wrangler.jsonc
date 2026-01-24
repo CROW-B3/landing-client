@@ -2,7 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "crow-landing-client",
   "account_id": "8f0203259905d8923687286c84921e6c",
-  "main": "dist/_worker.js",
+  "main": "dist/_worker.js/index.js",
   "compatibility_date": "2025-03-01",
   "compatibility_flags": ["nodejs_compat"],
   "assets": {

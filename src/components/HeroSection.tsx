@@ -1,7 +1,26 @@
 import { HeroText, InputField, Subtitle } from '@b3-crow/ui-kit'
+import { useState } from 'react'
 import { IoChevronDown } from 'react-icons/io5'
+import { createSession } from '@/lib/api/qna'
 
 export function HeroSection() {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleSubmit = async (query: string) => {
+    if (!query.trim() || isSubmitting)
+      return
+
+    setIsSubmitting(true)
+
+    try {
+      const session = await createSession()
+      window.location.href = `/ask/${session.id}?q=${encodeURIComponent(query.trim())}`
+    }
+    catch {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <section className="relative flex h-screen w-full flex-col items-center justify-center select-none px-4 lg:px-0">
       <div className="flex flex-col items-center gap-8 w-full lg:w-auto">
@@ -11,7 +30,8 @@ export function HeroSection() {
 
         <InputField
           placeholder="Ask CROW Anything..."
-          onSubmit={() => { /* TODO: Implement submission logic */ }}
+          onSubmit={handleSubmit}
+          disabled={isSubmitting}
         />
       </div>
 

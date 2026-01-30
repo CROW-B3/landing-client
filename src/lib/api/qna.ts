@@ -1,33 +1,69 @@
 import { useMutation } from '@tanstack/react-query'
 import ky from 'ky'
 
-interface Message {
+export interface Message {
   role: 'user' | 'assistant'
   content: string
 }
 
-interface QueryRequest {
-  query: string
-  history?: Message[]
+export interface ChatMessage extends Message {
+  id: string
+  sessionId: string
+  createdAt: string
 }
 
-interface QueryResponse {
+export interface ChatSession {
+  id: string
+  title: string | null
+  createdAt: string
+  updatedAt: string
+}
+
+export interface SessionWithMessages extends ChatSession {
+  messages: ChatMessage[]
+}
+
+interface SendMessageRequest {
+  sessionId: string
+  query: string
+}
+
+interface SendMessageResponse {
+  userMessage: ChatMessage
+  assistantMessage: ChatMessage
   response: string
 }
 
-const API_URL = process.env['NEXT_PUBLIC_API_URL'] || 'http://localhost:8000'
+const API_URL = import.meta.env.PUBLIC_QNA_API_URL || 'http://localhost:8787'
 
-async function sendQuery(request: QueryRequest): Promise<QueryResponse> {
-  return ky.post(`${API_URL}/api/v1/qna/query`, {
-    json: request,
+export async function createSession(title?: string): Promise<ChatSession> {
+  return ky.post(`${API_URL}/api/v1/sessions`, {
+    json: title ? { title } : {},
     credentials: 'include',
   }).json()
 }
 
-export function useQnAQuery() {
+export async function getSession(sessionId: string): Promise<SessionWithMessages> {
+  return ky.get(`${API_URL}/api/v1/sessions/${sessionId}`, {
+    credentials: 'include',
+  }).json()
+}
+
+async function sendMessage(request: SendMessageRequest): Promise<SendMessageResponse> {
+  return ky.post(`${API_URL}/api/v1/sessions/${request.sessionId}/messages`, {
+    json: { query: request.query },
+    credentials: 'include',
+  }).json()
+}
+
+export function useSendMessage() {
   return useMutation({
-    mutationFn: sendQuery,
+    mutationFn: sendMessage,
   })
 }
 
-export type { Message, QueryRequest, QueryResponse }
+export function useCreateSession() {
+  return useMutation({
+    mutationFn: (title?: string) => createSession(title),
+  })
+}

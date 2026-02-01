@@ -1,7 +1,7 @@
 import { HeroText, InputField, Subtitle } from '@b3-crow/ui-kit'
 import { useState } from 'react'
 import { IoChevronDown } from 'react-icons/io5'
-import { createSession } from '@/lib/api/qna'
+import { createSession, sendMessage } from '@/lib/api/qna'
 
 export function HeroSection() {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -14,7 +14,8 @@ export function HeroSection() {
 
     try {
       const session = await createSession()
-      window.location.href = `/ask/${session.id}?q=${encodeURIComponent(query.trim())}`
+      await sendMessage({ sessionId: session.id, query: query.trim() })
+      window.location.href = `/ask/${session.id}`
     }
     catch {
       setIsSubmitting(false)

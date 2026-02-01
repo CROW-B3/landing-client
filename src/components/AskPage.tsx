@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { IoSend } from 'react-icons/io5'
 import { Navigation } from '@/components/Navigation'
-import { createSession } from '@/lib/api/qna'
+import { createSession, sendMessage } from '@/lib/api/qna'
 
 function LoadingDots() {
   return (
@@ -40,7 +40,8 @@ export function AskPage() {
 
     try {
       const session = await createSession()
-      window.location.href = `/ask/${session.id}?q=${encodeURIComponent(input.trim())}`
+      await sendMessage({ sessionId: session.id, query: input.trim() })
+      window.location.href = `/ask/${session.id}`
     }
     catch {
       setIsCreating(false)

@@ -12,7 +12,6 @@ const queryClient = new QueryClient()
 
 interface SessionPageProps {
   sessionId: string
-  initialQuery?: string
 }
 
 function LoadingDots() {
@@ -63,12 +62,11 @@ function MessageBubble({ message }: { message: Message }) {
   )
 }
 
-function SessionPageContent({ sessionId, initialQuery }: SessionPageProps) {
+function SessionPageContent({ sessionId }: SessionPageProps) {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const initialQuerySent = useRef(false)
 
   const formRef = useRef<HTMLFormElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -110,12 +108,6 @@ function SessionPageContent({ sessionId, initialQuery }: SessionPageProps) {
         }))
         setMessages(loadedMessages)
         setIsLoading(false)
-
-        if (initialQuery && loadedMessages.length === 0 && !initialQuerySent.current) {
-          initialQuerySent.current = true
-          sendMessageToSession(initialQuery)
-          window.history.replaceState({}, '', `/ask/${sessionId}`)
-        }
       }
       catch {
         setError('Session not found')
@@ -123,8 +115,7 @@ function SessionPageContent({ sessionId, initialQuery }: SessionPageProps) {
       }
     }
     loadSession()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessionId, initialQuery])
+  }, [sessionId])
 
   const handleSubmit = (e: Event) => {
     e.preventDefault()

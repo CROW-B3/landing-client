@@ -5,9 +5,8 @@ import Layout from '@/layouts/Layout.astro';
 import { SessionPage } from '@/components/SessionPage';
 
 const { id } = Astro.params;
-const query = Astro.url.searchParams.get('q') || '';
 ---
 
 <Layout title="Ask CROW">
-  <SessionPage client:only="preact" sessionId={id} initialQuery={query} />
+  <SessionPage client:only="preact" sessionId={id} />
 </Layout>

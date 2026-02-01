@@ -34,23 +34,23 @@ interface SendMessageResponse {
   response: string
 }
 
-const API_URL = import.meta.env.PUBLIC_QNA_API_URL || 'http://localhost:8787'
+const API_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:8000'
 
 export async function createSession(title?: string): Promise<ChatSession> {
-  return ky.post(`${API_URL}/api/v1/sessions`, {
+  return ky.post(`${API_URL}/api/v1/qna/sessions`, {
     json: title ? { title } : {},
     credentials: 'include',
   }).json()
 }
 
 export async function getSession(sessionId: string): Promise<SessionWithMessages> {
-  return ky.get(`${API_URL}/api/v1/sessions/${sessionId}`, {
+  return ky.get(`${API_URL}/api/v1/qna/sessions/${sessionId}`, {
     credentials: 'include',
   }).json()
 }
 
-async function sendMessage(request: SendMessageRequest): Promise<SendMessageResponse> {
-  return ky.post(`${API_URL}/api/v1/sessions/${request.sessionId}/messages`, {
+export async function sendMessage(request: SendMessageRequest): Promise<SendMessageResponse> {
+  return ky.post(`${API_URL}/api/v1/qna/sessions/${request.sessionId}/messages`, {
     json: { query: request.query },
     credentials: 'include',
   }).json()

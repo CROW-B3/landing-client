@@ -2,8 +2,8 @@ import type { ChatMessage, Message } from '@/lib/api/qna'
 import { AnimatedBackground } from '@b3-crow/ui-kit'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AnimatePresence, motion } from 'framer-motion'
+import { Send } from 'lucide-preact'
 import { useEffect, useRef, useState } from 'react'
-import { IoSend } from 'react-icons/io5'
 import ReactMarkdown from 'react-markdown'
 import { Navigation } from '@/components/Navigation'
 import { getSession, useSendMessage } from '@/lib/api/qna'
@@ -214,7 +214,7 @@ function SessionPageContent({ sessionId }: SessionPageProps) {
                 disabled={isPending || !input.trim()}
                 className="p-3 bg-purple-600 hover:bg-purple-500 disabled:bg-purple-600/50 disabled:cursor-not-allowed rounded-xl transition-colors"
               >
-                <IoSend className="w-5 h-5 text-white" />
+                <Send className="w-5 h-5 text-white" />
               </button>
             </form>
           </div>

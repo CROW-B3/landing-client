@@ -1,14 +1,12 @@
 import { Button, Card, SectionLabel } from '@b3-crow/ui-kit'
-import { MdApi, MdOutlineDeveloperBoard } from 'react-icons/md'
-import { RiCodeBoxLine } from 'react-icons/ri'
-import { TbLockCode } from 'react-icons/tb'
+import { Code2, FileCode, Plug, ShieldCheck } from 'lucide-preact'
 import { docsData } from '@/config/content'
 
 const iconMap = {
-  TbLockCode,
-  MdApi,
-  MdOutlineDeveloperBoard,
-  RiCodeBoxLine,
+  TbLockCode: FileCode,
+  MdApi: Plug,
+  MdOutlineDeveloperBoard: ShieldCheck,
+  RiCodeBoxLine: Code2,
 }
 
 export function DocumentationSection() {

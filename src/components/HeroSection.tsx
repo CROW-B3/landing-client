@@ -1,6 +1,6 @@
 import { HeroText, InputField, Subtitle } from '@b3-crow/ui-kit'
+import { ChevronDown } from 'lucide-preact'
 import { useState } from 'react'
-import { IoChevronDown } from 'react-icons/io5'
 import { createSession, sendMessage } from '@/lib/api/qna'
 
 export function HeroSection() {
@@ -48,7 +48,7 @@ export function HeroSection() {
       </div>
 
       <div className="absolute bottom-8 left-8">
-        <IoChevronDown className="w-6 h-6 text-white/50 animate-bounce" />
+        <ChevronDown className="w-6 h-6 text-white/50 animate-bounce" />
       </div>
     </section>
   )

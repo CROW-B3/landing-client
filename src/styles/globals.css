@@ -51,69 +51,95 @@ html {
 	scroll-behavior: smooth;
 }
 
-/* Scroll-triggered animations */
+/* GPU-accelerated animations */
 @keyframes slideInLeft {
 	from {
 		opacity: 0;
-		transform: translateX(-50px);
+		transform: translate3d(-50px, 0, 0);
 	}
 	to {
 		opacity: 1;
-		transform: translateX(0);
+		transform: translate3d(0, 0, 0);
 	}
 }
 
 @keyframes slideInRight {
 	from {
 		opacity: 0;
-		transform: translateX(50px);
+		transform: translate3d(50px, 0, 0);
 	}
 	to {
 		opacity: 1;
-		transform: translateX(0);
+		transform: translate3d(0, 0, 0);
 	}
 }
 
 @keyframes slideUpFade {
 	from {
 		opacity: 0;
-		transform: translateY(-20px);
+		transform: translate3d(0, -20px, 0);
 	}
 	to {
 		opacity: 1;
-		transform: translateY(0);
+		transform: translate3d(0, 0, 0);
 	}
 }
 
 @keyframes scalePulse {
 	from {
 		opacity: 0;
-		transform: scale(0.8);
+		transform: scale3d(0.8, 0.8, 1);
 	}
 	to {
 		opacity: 1;
-		transform: scale(1);
+		transform: scale3d(1, 1, 1);
+	}
+}
+
+@keyframes loadingDot {
+	0%, 100% {
+		transform: translate3d(0, 0, 0);
+	}
+	50% {
+		transform: translate3d(0, -6px, 0);
 	}
 }
 
 .animate-slide-in-left {
-	animation: slideInLeft 0.8s ease-out forwards;
+	animation: slideInLeft 0.5s ease-out forwards;
+	will-change: transform, opacity;
 }
 
 .animate-slide-in-right {
-	animation: slideInRight 0.8s ease-out forwards;
-	animation-delay: 0.2s;
+	animation: slideInRight 0.5s ease-out forwards;
+	animation-delay: 0.1s;
 	opacity: 0;
+	will-change: transform, opacity;
 }
 
 .animate-slide-up-fade {
-	animation: slideUpFade 0.5s ease-out forwards;
-	animation-delay: 0.2s;
+	animation: slideUpFade 0.3s ease-out forwards;
+	animation-delay: 0.1s;
 	opacity: 0;
+	will-change: transform, opacity;
 }
 
 .animate-scale-pulse {
 	animation: scalePulse 0.2s ease-out forwards;
+	will-change: transform, opacity;
+}
+
+.loading-dot {
+	animation: loadingDot 0.6s ease-in-out infinite;
+	will-change: transform;
+}
+
+.loading-dot:nth-child(2) {
+	animation-delay: 0.1s;
+}
+
+.loading-dot:nth-child(3) {
+	animation-delay: 0.2s;
 }
 
 body {

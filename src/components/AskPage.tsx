@@ -1,25 +1,15 @@
 import { AnimatedBackground } from '@b3-crow/ui-kit'
-import { motion } from 'framer-motion'
+import { Send } from 'lucide-preact'
 import { useRef, useState } from 'react'
-import { IoSend } from 'react-icons/io5'
 import { Navigation } from '@/components/Navigation'
 import { createSession, sendMessage } from '@/lib/api/qna'
 
 function LoadingDots() {
   return (
     <div className="flex gap-1">
-      {[0, 1, 2].map(i => (
-        <motion.div
-          key={i}
-          className="w-2 h-2 bg-purple-400 rounded-full"
-          animate={{ y: [0, -6, 0] }}
-          transition={{
-            duration: 0.6,
-            repeat: Infinity,
-            delay: i * 0.1,
-          }}
-        />
-      ))}
+      <div className="w-2 h-2 bg-purple-400 rounded-full loading-dot" />
+      <div className="w-2 h-2 bg-purple-400 rounded-full loading-dot" />
+      <div className="w-2 h-2 bg-purple-400 rounded-full loading-dot" />
     </div>
   )
 }
@@ -92,7 +82,7 @@ export function AskPage() {
                       <LoadingDots />
                     )
                   : (
-                      <IoSend className="w-5 h-5 text-white" />
+                      <Send className="w-5 h-5 text-white" />
                     )}
               </button>
             </form>

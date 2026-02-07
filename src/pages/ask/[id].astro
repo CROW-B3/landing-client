@@ -1,0 +1,12 @@
+---
+export const prerender = false;
+
+import Layout from '@/layouts/Layout.astro';
+import { SessionPage } from '@/components/SessionPage';
+
+const { id } = Astro.params;
+---
+
+<Layout title="Ask CROW">
+  <SessionPage client:only="preact" sessionId={id} />
+</Layout>

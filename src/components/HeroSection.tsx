@@ -1,7 +1,27 @@
 import { HeroText, InputField, Subtitle } from '@b3-crow/ui-kit'
-import { IoChevronDown } from 'react-icons/io5'
+import { ChevronDown } from 'lucide-preact'
+import { useState } from 'react'
+import { createSession, sendMessage } from '@/lib/api/qna'
 
 export function HeroSection() {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleSubmit = async (query: string) => {
+    if (!query.trim() || isSubmitting)
+      return
+
+    setIsSubmitting(true)
+
+    try {
+      const session = await createSession()
+      await sendMessage({ sessionId: session.id, query: query.trim() })
+      window.location.href = `/ask/${session.id}`
+    }
+    catch {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <section className="relative flex h-screen w-full flex-col items-center justify-center select-none px-4 lg:px-0">
       <div className="flex flex-col items-center gap-8 w-full lg:w-auto">
@@ -11,7 +31,8 @@ export function HeroSection() {
 
         <InputField
           placeholder="Ask CROW Anything..."
-          onSubmit={() => { /* TODO: Implement submission logic */ }}
+          onSubmit={handleSubmit}
+          disabled={isSubmitting}
         />
       </div>
 
@@ -27,7 +48,7 @@ export function HeroSection() {
       </div>
 
       <div className="absolute bottom-8 left-8">
-        <IoChevronDown className="w-6 h-6 text-white/50 animate-bounce" />
+        <ChevronDown className="w-6 h-6 text-white/50 animate-bounce" />
       </div>
     </section>
   )

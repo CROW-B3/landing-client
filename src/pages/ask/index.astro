@@ -1,0 +1,8 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { AskPage } from '@/components/AskPage';
+---
+
+<Layout title="Ask CROW">
+  <AskPage client:only="preact" />
+</Layout>

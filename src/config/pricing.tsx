@@ -1,8 +1,5 @@
 import type { PricingCardProps } from '@b3-crow/ui-kit'
-import { Globe, MessageSquare, Video } from 'lucide-preact'
-import { IoCheckmarkCircleOutline } from 'react-icons/io5'
-import { MdOutlineTouchApp } from 'react-icons/md'
-import { PiHeadCircuit } from 'react-icons/pi'
+import { Brain, CircleCheck, Globe, MessageSquare, Pointer, Video } from 'lucide-preact'
 
 export const pricingData: {
   monthly: Omit<PricingCardProps, 'period'>[]
@@ -16,8 +13,8 @@ export const pricingData: {
       description: 'Physical space analytics and flow tracking.',
       price: 69,
       infoItems: [
-        { icon: <MdOutlineTouchApp className="h-4 w-4" />, text: '1,000,000 interactions / month' },
-        { icon: <PiHeadCircuit className="h-4 w-4" />, text: '1,000,000 patterns / month' },
+        { icon: <Pointer className="h-4 w-4" />, text: '1,000,000 interactions / month' },
+        { icon: <Brain className="h-4 w-4" />, text: '1,000,000 patterns / month' },
       ],
       features: [
         { label: '5 Camera Streams', included: true },
@@ -27,7 +24,7 @@ export const pricingData: {
         { label: 'API Integration', included: true },
       ],
       accentColor: '#8B5CF6',
-      checkIcon: <IoCheckmarkCircleOutline className="h-4 w-4" style={{ color: '#8B5CF6' }} />,
+      checkIcon: <CircleCheck className="h-4 w-4" style={{ color: '#8B5CF6' }} />,
     },
     {
       icon: <Globe className="h-6 w-6 text-purple-300" />,
@@ -36,8 +33,8 @@ export const pricingData: {
       description: 'Full user journey and behavior modeling.',
       price: 69,
       infoItems: [
-        { icon: <MdOutlineTouchApp className="h-4 w-4" />, text: '1,000,000 interactions / month' },
-        { icon: <PiHeadCircuit className="h-4 w-4" />, text: '1,000,000 patterns / month' },
+        { icon: <Pointer className="h-4 w-4" />, text: '1,000,000 interactions / month' },
+        { icon: <Brain className="h-4 w-4" />, text: '1,000,000 patterns / month' },
       ],
       features: [
         { label: 'Unlimited Sessions', included: true },
@@ -49,7 +46,7 @@ export const pricingData: {
       isPopular: true,
       popularBadgeText: 'MOST POPULAR',
       accentColor: '#A855F7',
-      checkIcon: <IoCheckmarkCircleOutline className="h-4 w-4" style={{ color: '#A855F7' }} />,
+      checkIcon: <CircleCheck className="h-4 w-4" style={{ color: '#A855F7' }} />,
     },
     {
       icon: <MessageSquare className="h-6 w-6 text-gray-300" />,
@@ -58,8 +55,8 @@ export const pricingData: {
       description: 'Brand sentiment and feedback aggregation.',
       price: 69,
       infoItems: [
-        { icon: <MdOutlineTouchApp className="h-4 w-4" />, text: '1,000,000 interactions / month' },
-        { icon: <PiHeadCircuit className="h-4 w-4" />, text: '1,000,000 patterns / month' },
+        { icon: <Pointer className="h-4 w-4" />, text: '1,000,000 interactions / month' },
+        { icon: <Brain className="h-4 w-4" />, text: '1,000,000 patterns / month' },
       ],
       features: [
         { label: '5 Social Channels', included: true },
@@ -69,7 +66,7 @@ export const pricingData: {
         { label: 'Competitor Monitoring', included: true },
       ],
       accentColor: '#8B5CF6',
-      checkIcon: <IoCheckmarkCircleOutline className="h-4 w-4" style={{ color: '#8B5CF6' }} />,
+      checkIcon: <CircleCheck className="h-4 w-4" style={{ color: '#8B5CF6' }} />,
     },
   ],
   yearly: [
@@ -80,8 +77,8 @@ export const pricingData: {
       description: 'Physical space analytics and flow tracking.',
       price: 59,
       infoItems: [
-        { icon: <MdOutlineTouchApp className="h-4 w-4" />, text: '1,000,000 interactions / month' },
-        { icon: <PiHeadCircuit className="h-4 w-4" />, text: '1,000,000 patterns / month' },
+        { icon: <Pointer className="h-4 w-4" />, text: '1,000,000 interactions / month' },
+        { icon: <Brain className="h-4 w-4" />, text: '1,000,000 patterns / month' },
       ],
       features: [
         { label: '5 Camera Streams', included: true },
@@ -91,7 +88,7 @@ export const pricingData: {
         { label: 'API Integration', included: true },
       ],
       accentColor: '#8B5CF6',
-      checkIcon: <IoCheckmarkCircleOutline className="h-4 w-4" style={{ color: '#8B5CF6' }} />,
+      checkIcon: <CircleCheck className="h-4 w-4" style={{ color: '#8B5CF6' }} />,
     },
     {
       icon: <Globe className="h-6 w-6 text-purple-300" />,
@@ -100,8 +97,8 @@ export const pricingData: {
       description: 'Full user journey and behavior modeling.',
       price: 59,
       infoItems: [
-        { icon: <MdOutlineTouchApp className="h-4 w-4" />, text: '1,000,000 interactions / month' },
-        { icon: <PiHeadCircuit className="h-4 w-4" />, text: '1,000,000 patterns / month' },
+        { icon: <Pointer className="h-4 w-4" />, text: '1,000,000 interactions / month' },
+        { icon: <Brain className="h-4 w-4" />, text: '1,000,000 patterns / month' },
       ],
       features: [
         { label: 'Unlimited Sessions', included: true },
@@ -113,7 +110,7 @@ export const pricingData: {
       isPopular: true,
       popularBadgeText: 'MOST POPULAR',
       accentColor: '#A855F7',
-      checkIcon: <IoCheckmarkCircleOutline className="h-4 w-4" style={{ color: '#A855F7' }} />,
+      checkIcon: <CircleCheck className="h-4 w-4" style={{ color: '#A855F7' }} />,
     },
     {
       icon: <MessageSquare className="h-6 w-6 text-gray-300" />,
@@ -122,8 +119,8 @@ export const pricingData: {
       description: 'Brand sentiment and feedback aggregation.',
       price: 59,
       infoItems: [
-        { icon: <MdOutlineTouchApp className="h-4 w-4" />, text: '1,000,000 interactions / month' },
-        { icon: <PiHeadCircuit className="h-4 w-4" />, text: '1,000,000 patterns / month' },
+        { icon: <Pointer className="h-4 w-4" />, text: '1,000,000 interactions / month' },
+        { icon: <Brain className="h-4 w-4" />, text: '1,000,000 patterns / month' },
       ],
       features: [
         { label: '5 Social Channels', included: true },
@@ -133,7 +130,7 @@ export const pricingData: {
         { label: 'Competitor Monitoring', included: true },
       ],
       accentColor: '#8B5CF6',
-      checkIcon: <IoCheckmarkCircleOutline className="h-4 w-4" style={{ color: '#8B5CF6' }} />,
+      checkIcon: <CircleCheck className="h-4 w-4" style={{ color: '#8B5CF6' }} />,
     },
   ],
 }

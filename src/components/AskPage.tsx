@@ -1,0 +1,94 @@
+import { AnimatedBackground } from '@b3-crow/ui-kit'
+import { Send } from 'lucide-preact'
+import { useRef, useState } from 'react'
+import { Navigation } from '@/components/Navigation'
+import { createSession, sendMessage } from '@/lib/api/qna'
+
+function LoadingDots() {
+  return (
+    <div className="flex gap-1">
+      <div className="w-2 h-2 bg-purple-400 rounded-full loading-dot" />
+      <div className="w-2 h-2 bg-purple-400 rounded-full loading-dot" />
+      <div className="w-2 h-2 bg-purple-400 rounded-full loading-dot" />
+    </div>
+  )
+}
+
+export function AskPage() {
+  const [input, setInput] = useState('')
+  const [isCreating, setIsCreating] = useState(false)
+
+  const formRef = useRef<HTMLFormElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const handleSubmit = async (e: Event) => {
+    e.preventDefault()
+    if (!input.trim() || isCreating)
+      return
+
+    setIsCreating(true)
+
+    try {
+      const session = await createSession()
+      await sendMessage({ sessionId: session.id, query: input.trim() })
+      window.location.href = `/ask/${session.id}`
+    }
+    catch {
+      setIsCreating(false)
+    }
+  }
+
+  return (
+    <div className="min-h-screen flex flex-col relative">
+      <AnimatedBackground
+        variant="fullscreen"
+        enableVerticalFade={true}
+        fadeIntensity={0.9}
+      />
+
+      <div className="relative z-10 flex flex-col h-screen">
+        <Navigation />
+
+        <div className="flex-1 flex flex-col max-w-3xl mx-auto w-full px-4 pt-20 pb-4">
+          <div className="flex-1 flex flex-col items-center justify-center text-center">
+            <h1 className="text-3xl font-bold text-white mb-2">Ask CROW</h1>
+            <p className="text-white/60 max-w-md">
+              Ask anything about CROW, our documentation, or blog posts.
+            </p>
+          </div>
+
+          <div className="sticky bottom-0 pt-4 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a] to-transparent">
+            <form
+              ref={formRef}
+              onSubmit={handleSubmit}
+              className="flex gap-2 items-center bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-2"
+            >
+              <input
+                ref={inputRef}
+                type="text"
+                value={input}
+                onChange={e => setInput((e.target as HTMLInputElement).value)}
+                placeholder="Ask a question..."
+                disabled={isCreating}
+                className="flex-1 bg-transparent text-white placeholder-white/40 px-4 py-2 outline-none text-sm"
+              />
+              <button
+                type="submit"
+                disabled={isCreating || !input.trim()}
+                className="p-3 bg-purple-600 hover:bg-purple-500 disabled:bg-purple-600/50 disabled:cursor-not-allowed rounded-xl transition-colors"
+              >
+                {isCreating
+                  ? (
+                      <LoadingDots />
+                    )
+                  : (
+                      <Send className="w-5 h-5 text-white" />
+                    )}
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}

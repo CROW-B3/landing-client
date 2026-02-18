@@ -53,7 +53,7 @@
         {
           "binding": "DB_MAIN",
           "database_name": "crow-landing-client-db-dev",
-          "database_id": "2be2e67e-3ce8-4bb8-821c-2fd7891632f4",
+          "database_id": "0a787c5a-7269-4e17-9be8-cd993c2eba05",
         },
       ],
       "r2_buckets": [

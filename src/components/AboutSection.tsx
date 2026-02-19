@@ -39,7 +39,7 @@ export function AboutSection({
           </div>
         </div>
 
-        <div className="flex items-center justify-center -mt-8 sm:-mt-12 lg:mt-0 animate-slide-in-right ml-40">
+        <div className="flex items-center justify-center -mt-8 sm:-mt-12 lg:mt-0 animate-slide-in-right lg:ml-40">
           <div className="transform scale-[0.5] sm:scale-[0.7] md:scale-[0.85] lg:scale-100 origin-center">
             <Globe size={800} />
           </div>

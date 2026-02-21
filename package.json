@@ -24,7 +24,8 @@
     "db:generate": "drizzle-kit generate",
     "db:seed": "tsx scripts/seed.ts",
     "prepare": "husky",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "test:e2e": "playwright test"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

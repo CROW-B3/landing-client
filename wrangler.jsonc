@@ -13,55 +13,40 @@
   "observability": {
     "enabled": true,
   },
-  "d1_databases": [
-    {
-      "binding": "DB_MAIN",
-      "database_name": "crow-landing-client-db",
-      "database_id": "144acd91-0888-4e60-b160-4b2260ac71ee",
-    },
-  ],
-  "r2_buckets": [
-    {
-      "binding": "R2_BUCKET",
-      "bucket_name": "crow-landing-client-assets",
-    },
-  ],
-  "placement": { "mode": "smart" },
-  "routes": [
-    { "pattern": "crowai.dev", "custom_domain": true }
-  ],
   "vars": {
+    "ENVIRONMENT": "prod",
     "NEXT_PUBLIC_API_URL": "https://api.crowai.dev",
     "NEXT_PUBLIC_CROW_APP_URL": "https://app.crowai.dev",
     "NEXT_PUBLIC_R2_PUBLIC_URL": "https://assets.crowai.dev",
     "CLOUDFLARE_ACCOUNT_ID": "8f0203259905d8923687286c84921e6c",
     "CLOUDFLARE_R2_STORAGE_BUCKET": "crow-landing-client-assets"
   },
+  "kv_namespaces": [
+    {
+      "binding": "NEXT_INC_CACHE_KV",
+      "id": "5de59b6655254c048ac1bccde2190c4d",
+    },
+  ],
+  "placement": { "mode": "smart" },
+  "routes": [
+    { "pattern": "crowai.dev", "custom_domain": true }
+  ],
   "env": {
     "dev": {
-      "routes": [
-        { "pattern": "dev.crowai.dev", "custom_domain": true }
-      ],
       "vars": {
-        "NEXT_PUBLIC_API_URL": "https://dev.api.crowai.dev",
-        "NEXT_PUBLIC_CROW_APP_URL": "https://dev.app.crowai.dev",
-        "NEXT_PUBLIC_R2_PUBLIC_URL": "https://dev-assets.crowai.dev",
-        "CLOUDFLARE_ACCOUNT_ID": "8f0203259905d8923687286c84921e6c",
-        "CLOUDFLARE_R2_STORAGE_BUCKET": "crow-landing-client-assets-dev"
+        "ENVIRONMENT": "dev",
       },
-      "d1_databases": [
+      "kv_namespaces": [
         {
-          "binding": "DB_MAIN",
-          "database_name": "crow-landing-client-db-dev",
-          "database_id": "2be2e67e-3ce8-4bb8-821c-2fd7891632f4",
+          "binding": "NEXT_INC_CACHE_KV",
+          "id": "7863efdaa9c347e2bbd5bb303b88635a",
         },
       ],
-      "r2_buckets": [
-        {
-          "binding": "R2_BUCKET",
-          "bucket_name": "crow-landing-client-assets-dev",
-        },
-      ],
+    },
+    "local": {
+      "vars": {
+        "ENVIRONMENT": "local",
+      },
     },
   },
 }

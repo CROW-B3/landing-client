@@ -1,14 +1,19 @@
+'use client'
+
 import type { AboutSectionProps } from '@/types'
 import { Globe } from '@b3-crow/ui-kit'
 
-export function AboutSection({
+export default function AboutSection({
   label = 'ABOUT',
   title = 'CROW',
   subtitle = '(Cognitive Reasoning Observation Watcher)',
   description = 'Unifies website analytics, CCTV insights, and social feedback into one model - showing real shopper behaviour across every channel.',
 }: AboutSectionProps) {
   return (
-    <section id="about" className="relative min-h-screen w-full flex items-center justify-center px-4 sm:px-8 py-20 overflow-hidden">
+    <section
+      id="about"
+      className="relative min-h-screen w-full flex items-center justify-center px-4 sm:px-8 py-20 overflow-hidden"
+    >
       <div className="relative z-10 max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-16 items-center">
         <div className="relative h-full flex flex-col animate-slide-in-left">
           <div className="text-white/40 text-sm font-mono tracking-wider mb-12 lg:mb-auto">

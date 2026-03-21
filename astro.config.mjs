@@ -47,6 +47,9 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+    define: {
+      'process.env': JSON.stringify({}),
+    },
     ssr: {
       noExternal: ['@b3-crow/ui-kit'],
     },

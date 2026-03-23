@@ -35,6 +35,7 @@
     "NEXT_PUBLIC_API_URL": "https://api.crowai.dev",
     "PUBLIC_API_URL": "https://api.crowai.dev",
     "NEXT_PUBLIC_CROW_APP_URL": "https://app.crowai.dev",
+    "PUBLIC_CROW_APP_URL": "https://app.crowai.dev",
     "NEXT_PUBLIC_R2_PUBLIC_URL": "https://assets.crowai.dev",
     "CLOUDFLARE_ACCOUNT_ID": "8f0203259905d8923687286c84921e6c",
     "CLOUDFLARE_R2_STORAGE_BUCKET": "crow-landing-client-assets"
@@ -49,6 +50,7 @@
         "NEXT_PUBLIC_API_URL": "https://dev.api.crowai.dev",
         "PUBLIC_API_URL": "https://dev.api.crowai.dev",
         "NEXT_PUBLIC_CROW_APP_URL": "https://dev.app.crowai.dev",
+        "PUBLIC_CROW_APP_URL": "https://dev.app.crowai.dev",
         "NEXT_PUBLIC_R2_PUBLIC_URL": "https://dev-assets.crowai.dev",
         "CLOUDFLARE_ACCOUNT_ID": "8f0203259905d8923687286c84921e6c",
         "CLOUDFLARE_R2_STORAGE_BUCKET": "crow-landing-client-assets-dev"
@@ -73,6 +75,7 @@
         "NEXT_PUBLIC_API_URL": "http://localhost:8000",
         "PUBLIC_API_URL": "http://localhost:8000",
         "NEXT_PUBLIC_CROW_APP_URL": "http://localhost:3002",
+        "PUBLIC_CROW_APP_URL": "http://localhost:3002",
         "NEXT_PUBLIC_R2_PUBLIC_URL": "https://assets.crowai.dev",
         "CLOUDFLARE_ACCOUNT_ID": "8f0203259905d8923687286c84921e6c",
         "CLOUDFLARE_R2_STORAGE_BUCKET": "crow-landing-client-assets"

@@ -1,5 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 import ky from 'ky'
+import { ENV } from '@/lib/env'
 
 export interface Message {
   role: 'user' | 'assistant'
@@ -34,23 +35,25 @@ interface SendMessageResponse {
   response: string
 }
 
-const API_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:8000'
+function getApiUrl() {
+  return ENV.PUBLIC_API_URL
+}
 
 export async function createSession(title?: string): Promise<ChatSession> {
-  return ky.post(`${API_URL}/api/v1/qna/sessions`, {
+  return ky.post(`${getApiUrl()}/api/v1/qna/sessions`, {
     json: title ? { title } : {},
     credentials: 'include',
   }).json()
 }
 
 export async function getSession(sessionId: string): Promise<SessionWithMessages> {
-  return ky.get(`${API_URL}/api/v1/qna/sessions/${sessionId}`, {
+  return ky.get(`${getApiUrl()}/api/v1/qna/sessions/${sessionId}`, {
     credentials: 'include',
   }).json()
 }
 
 export async function sendMessage(request: SendMessageRequest): Promise<SendMessageResponse> {
-  return ky.post(`${API_URL}/api/v1/qna/sessions/${request.sessionId}/messages`, {
+  return ky.post(`${getApiUrl()}/api/v1/qna/sessions/${request.sessionId}/messages`, {
     json: { query: request.query },
     credentials: 'include',
   }).json()

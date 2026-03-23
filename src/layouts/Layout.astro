@@ -7,6 +7,10 @@ interface Props {
 }
 
 const { title, description = "We are thrilled to unveil CROW, our most advanced model yet, blending superior reasoning with extensive pretraining knowledge." } = Astro.props;
+
+const runtimeEnv = Astro.locals?.runtime?.env ?? {};
+const publicApiUrl = runtimeEnv.PUBLIC_API_URL ?? import.meta.env.PUBLIC_API_URL ?? '';
+const publicCrowAppUrl = runtimeEnv.PUBLIC_CROW_APP_URL ?? runtimeEnv.NEXT_PUBLIC_CROW_APP_URL ?? import.meta.env.PUBLIC_CROW_APP_URL ?? '';
 ---
 
 <!doctype html>
@@ -20,6 +24,12 @@ const { title, description = "We are thrilled to unveil CROW, our most advanced 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600&display=swap" rel="stylesheet" />
     <title>{title}</title>
+    <script is:inline define:vars={{ publicApiUrl, publicCrowAppUrl }}>
+      window.__ENV__ = {
+        PUBLIC_API_URL: publicApiUrl,
+        PUBLIC_CROW_APP_URL: publicCrowAppUrl,
+      };
+    </script>
   </head>
   <body class="antialiased">
     <slot />

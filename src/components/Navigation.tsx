@@ -1,4 +1,5 @@
 import { Button, Navbar, NavLink } from '@b3-crow/ui-kit'
+import { ENV } from '@/lib/env'
 
 export function Navigation() {
   return (
@@ -17,7 +18,7 @@ export function Navigation() {
         </>
       )}
       rightContent={(
-        <Button variant="outline" href={import.meta.env.PUBLIC_CROW_APP_URL || '#'}>
+        <Button variant="outline" href={ENV.PUBLIC_CROW_APP_URL}>
           Try CROW
         </Button>
       )}

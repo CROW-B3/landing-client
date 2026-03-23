@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
+  output: 'server',
   adapter: cloudflare({
     imageService: 'cloudflare',
     platformProxy: {
@@ -31,6 +32,14 @@ export default defineConfig({
       },
       {
         hostname: 'crow-landing-client.bitbybit-b3.workers.dev',
+        protocol: 'https',
+      },
+      {
+        hostname: '**.crowai.dev',
+        protocol: 'https',
+      },
+      {
+        hostname: 'crowai.dev',
         protocol: 'https',
       },
       {

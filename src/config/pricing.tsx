@@ -11,7 +11,7 @@ export const pricingData: {
       category: 'OBSERVATION',
       title: 'CCTV',
       description: 'Physical space analytics and flow tracking.',
-      price: 69,
+      price: 29,
       infoItems: [
         { icon: <Pointer className="h-4 w-4" />, text: '1,000,000 interactions / month' },
         { icon: <Brain className="h-4 w-4" />, text: '1,000,000 patterns / month' },
@@ -31,7 +31,7 @@ export const pricingData: {
       category: 'DIGITAL',
       title: 'Web',
       description: 'Full user journey and behavior modeling.',
-      price: 69,
+      price: 49,
       infoItems: [
         { icon: <Pointer className="h-4 w-4" />, text: '1,000,000 interactions / month' },
         { icon: <Brain className="h-4 w-4" />, text: '1,000,000 patterns / month' },
@@ -53,7 +53,7 @@ export const pricingData: {
       category: 'SENTIMENT',
       title: 'Social',
       description: 'Brand sentiment and feedback aggregation.',
-      price: 69,
+      price: 39,
       infoItems: [
         { icon: <Pointer className="h-4 w-4" />, text: '1,000,000 interactions / month' },
         { icon: <Brain className="h-4 w-4" />, text: '1,000,000 patterns / month' },
@@ -75,7 +75,7 @@ export const pricingData: {
       category: 'OBSERVATION',
       title: 'CCTV',
       description: 'Physical space analytics and flow tracking.',
-      price: 59,
+      price: 24,
       infoItems: [
         { icon: <Pointer className="h-4 w-4" />, text: '1,000,000 interactions / month' },
         { icon: <Brain className="h-4 w-4" />, text: '1,000,000 patterns / month' },
@@ -95,7 +95,7 @@ export const pricingData: {
       category: 'DIGITAL',
       title: 'Web',
       description: 'Full user journey and behavior modeling.',
-      price: 59,
+      price: 39,
       infoItems: [
         { icon: <Pointer className="h-4 w-4" />, text: '1,000,000 interactions / month' },
         { icon: <Brain className="h-4 w-4" />, text: '1,000,000 patterns / month' },
@@ -117,7 +117,7 @@ export const pricingData: {
       category: 'SENTIMENT',
       title: 'Social',
       description: 'Brand sentiment and feedback aggregation.',
-      price: 59,
+      price: 29,
       infoItems: [
         { icon: <Pointer className="h-4 w-4" />, text: '1,000,000 interactions / month' },
         { icon: <Brain className="h-4 w-4" />, text: '1,000,000 patterns / month' },

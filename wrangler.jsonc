@@ -67,7 +67,7 @@
           "binding": "R2_BUCKET",
           "bucket_name": "crow-landing-client-assets-dev"
         }
-      ]
+      ],"name": "crow-landing-client-dev"
     },
     "local": {
       "vars": {

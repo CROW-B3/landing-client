@@ -4,82 +4,10 @@
   "account_id": "8f0203259905d8923687286c84921e6c",
   "main": "dist/_worker.js/index.js",
   "compatibility_date": "2025-03-01",
-  "compatibility_flags": ["nodejs_compat"],
-  "assets": {
-    "binding": "ASSETS",
-    "directory": "dist"
-  },
-  "logpush": true,
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
   "observability": {
     "enabled": true
-  },
-  "d1_databases": [
-    {
-      "binding": "DB_MAIN",
-      "database_name": "crow-landing-client-db",
-      "database_id": "144acd91-0888-4e60-b160-4b2260ac71ee"
-    }
-  ],
-  "r2_buckets": [
-    {
-      "binding": "R2_BUCKET",
-      "bucket_name": "crow-landing-client-assets"
-    }
-  ],
-  "placement": { "mode": "smart" },
-  "routes": [
-    { "pattern": "crowai.dev", "custom_domain": true }
-  ],
-  "vars": {
-    "ENVIRONMENT": "prod",
-    "NEXT_PUBLIC_API_URL": "https://api.crowai.dev",
-    "PUBLIC_API_URL": "https://api.crowai.dev",
-    "NEXT_PUBLIC_CROW_APP_URL": "https://app.crowai.dev",
-    "PUBLIC_CROW_APP_URL": "https://app.crowai.dev",
-    "NEXT_PUBLIC_R2_PUBLIC_URL": "https://assets.crowai.dev",
-    "CLOUDFLARE_ACCOUNT_ID": "8f0203259905d8923687286c84921e6c",
-    "CLOUDFLARE_R2_STORAGE_BUCKET": "crow-landing-client-assets"
-  },
-  "env": {
-    "dev": {
-      "routes": [
-        { "pattern": "dev.crowai.dev", "custom_domain": true }
-      ],
-      "vars": {
-        "ENVIRONMENT": "dev",
-        "NEXT_PUBLIC_API_URL": "https://dev.api.crowai.dev",
-        "PUBLIC_API_URL": "https://dev.api.crowai.dev",
-        "NEXT_PUBLIC_CROW_APP_URL": "https://dev.app.crowai.dev",
-        "PUBLIC_CROW_APP_URL": "https://dev.app.crowai.dev",
-        "NEXT_PUBLIC_R2_PUBLIC_URL": "https://dev-assets.crowai.dev",
-        "CLOUDFLARE_ACCOUNT_ID": "8f0203259905d8923687286c84921e6c",
-        "CLOUDFLARE_R2_STORAGE_BUCKET": "crow-landing-client-assets-dev"
-      },
-      "d1_databases": [
-        {
-          "binding": "DB_MAIN",
-          "database_name": "crow-landing-client-db-dev",
-          "database_id": "0a787c5a-7269-4e17-9be8-cd993c2eba05"
-        }
-      ],
-      "r2_buckets": [
-        {
-          "binding": "R2_BUCKET",
-          "bucket_name": "crow-landing-client-assets-dev"
-        }
-      ]
-    },
-    "local": {
-      "vars": {
-        "ENVIRONMENT": "local",
-        "NEXT_PUBLIC_API_URL": "http://localhost:8000",
-        "PUBLIC_API_URL": "http://localhost:8000",
-        "NEXT_PUBLIC_CROW_APP_URL": "http://localhost:3002",
-        "PUBLIC_CROW_APP_URL": "http://localhost:3002",
-        "NEXT_PUBLIC_R2_PUBLIC_URL": "https://assets.crowai.dev",
-        "CLOUDFLARE_ACCOUNT_ID": "8f0203259905d8923687286c84921e6c",
-        "CLOUDFLARE_R2_STORAGE_BUCKET": "crow-landing-client-assets"
-      }
-    }
   }
 }

@@ -152,7 +152,10 @@ export function MobileLanding() {
         window.scrollTo({ top: 0, behavior: 'smooth' })
         return
       }
-      const el = document.getElementById(id)
+      // Mobile sections use an `m-` prefix so they don't collide with the
+      // desktop sections' canonical anchor IDs (#about etc.) — duplicate IDs
+      // broke desktop navbar scrolling (getElementById hit the hidden mobile one).
+      const el = document.getElementById(`m-${id}`)
       if (el)
         window.scrollTo({ top: Math.max(0, el.getBoundingClientRect().top + window.scrollY - 8), behavior: 'smooth' })
     })
@@ -294,7 +297,7 @@ export function MobileLanding() {
               <span style="font-weight:800;font-size:16px;letter-spacing:.04em;color:#fff">CROW</span>
             </button>
             <div style="width:1px;height:18px;background:rgba(255,255,255,.14);margin:0 11px"></div>
-            <button type="button" class="tapsc" onClick={() => openChat('What is CROW and what can it do?')} style="font-size:13px;font-weight:600;color:#000;background:#fff;border:none;border-radius:980px;padding:8px 14px;cursor:pointer">Try</button>
+            <button type="button" class="tapsc" onClick={() => openChat('What is CROW and what can it do?')} style="font-size:13px;font-weight:600;color:#fff;background:linear-gradient(155deg,#A855F7,#7C3AED);border:none;border-radius:980px;padding:8px 14px;cursor:pointer">Try</button>
             <button type="button" class="tapsc" onClick={() => setMenuOpen(true)} aria-label="Menu" style="width:38px;height:38px;margin-left:4px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.06);border:none;border-radius:50%;color:#fff;cursor:pointer">
               <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                 <line x1="3" y1="7" x2="21" y2="7" />
@@ -321,7 +324,7 @@ export function MobileLanding() {
 
           <form onSubmit={submitHero} style="position:relative;margin-top:26px;width:100%;max-width:330px;display:flex;align-items:center;gap:8px;padding:8px 8px 8px 18px;border-radius:980px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.13);box-shadow:0 10px 34px rgba(0,0,0,.4);opacity:0;animation:crowm-revealUp .8s cubic-bezier(.2,.8,.2,1) .62s both">
             <input type="text" value={heroInput} onInput={e => setHeroInput((e.target as HTMLInputElement).value)} placeholder="Ask CROW anything..." autocomplete="off" enterkeyhint="send" style="flex:1;min-width:0;background:transparent;border:none;outline:none;color:#fff;font-family:'Sora',sans-serif;font-size:15px" />
-            <button type="submit" class="tapsc" aria-label="Ask" style="flex:none;width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(155deg, var(--accent,#A855F7), #7C3AED);box-shadow:0 6px 18px rgba(124,58,237,.5)">
+            <button type="submit" class="tapsc" aria-label="Ask" style="flex:none;width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(155deg,#6D28D9,#5B21B6);box-shadow:0 6px 18px rgba(91,33,182,.55)">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="12" y1="19" x2="12" y2="5" />
                 <polyline points="5 12 12 5 19 12" />
@@ -361,14 +364,14 @@ export function MobileLanding() {
         </div>
 
         {/* ABOUT */}
-        <section id="about" data-reveal style="position:relative;padding:56px 22px 48px">
+        <section id="m-about" data-reveal style="position:relative;padding:56px 22px 48px">
           <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.28em;color:rgba(255,255,255,.4)">[ ABOUT ]</div>
-          <div style="position:relative;display:flex;justify-content:center;margin:24px 0 28px">
-            <div style="position:relative;width:236px;height:236px;display:flex;align-items:center;justify-content:center">
-              <div class="amb" style="position:absolute;inset:-16%;background:radial-gradient(circle at 50% 45%,rgba(168,85,247,.4),transparent 62%);filter:blur(14px);animation:crowm-glowB 11s ease-in-out infinite"></div>
-              <div style="position:absolute;width:202px;height:202px;border-radius:50%;border:1px solid rgba(168,85,247,.18)"></div>
-              <div style="position:relative;width:232px;height:232px;display:flex;align-items:center;justify-content:center">
-                <Globe size={232} />
+          <div style="position:relative;display:flex;justify-content:center;margin:20px 0 30px">
+            <div style="position:relative;width:300px;max-width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center">
+              <div class="amb" style="position:absolute;inset:-16%;background:radial-gradient(circle at 50% 45%,rgba(168,85,247,.42),transparent 62%);filter:blur(18px);animation:crowm-glowB 11s ease-in-out infinite"></div>
+              <div style="position:absolute;width:88%;height:88%;border-radius:50%;border:1px solid rgba(168,85,247,.18)"></div>
+              <div style="position:relative;width:300px;height:300px;max-width:100%;display:flex;align-items:center;justify-content:center">
+                <Globe size={300} />
               </div>
             </div>
           </div>
@@ -408,7 +411,7 @@ export function MobileLanding() {
         </section>
 
         {/* FEATURES */}
-        <section id="features" data-reveal style="position:relative;padding:56px 22px">
+        <section id="m-features" data-reveal style="position:relative;padding:56px 22px">
           <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.28em;color:rgba(255,255,255,.4)">[ FEATURES ]</div>
           <h2 style="margin:10px 0 22px;font-size:32px;font-weight:800;letter-spacing:-.035em;color:#fff;line-height:1.05">
             One model.
@@ -430,7 +433,7 @@ export function MobileLanding() {
         </section>
 
         {/* PRICING */}
-        <section id="pricing" data-reveal style="position:relative;padding:56px 22px">
+        <section id="m-pricing" data-reveal style="position:relative;padding:56px 22px">
           <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.28em;color:rgba(255,255,255,.4)">[ PLANS ]</div>
           <h2 style="margin:10px 0 18px;font-size:32px;font-weight:800;letter-spacing:-.035em;color:#fff;line-height:1.05">
             Pick a channel.
@@ -523,7 +526,7 @@ export function MobileLanding() {
                     </div>
                   ))}
                 </div>
-                <button type="button" class="tapsc" onClick={() => openChat('What\'s included in the CROW CCTV plan?')} style="margin-top:20px;position:relative;z-index:4;width:100%;font-size:14px;font-weight:600;color:#fff;background:linear-gradient(155deg,var(--accent,#A855F7),#7C3AED);border:none;border-radius:980px;padding:14px;cursor:pointer;box-shadow:0 8px 22px rgba(124,58,237,.45)">Get started</button>
+                <button type="button" class="tapsc" onClick={() => openChat('What\'s included in the CROW CCTV plan?')} style="margin-top:20px;position:relative;z-index:4;width:100%;font-size:14px;font-weight:600;color:#fff;background:linear-gradient(155deg,#6D28D9,#5B21B6);border:none;border-radius:980px;padding:14px;cursor:pointer;box-shadow:0 8px 22px rgba(91,33,182,.5)">Get started</button>
               </div>
             </div>
 
@@ -564,7 +567,7 @@ export function MobileLanding() {
         </section>
 
         {/* DOCUMENTATION */}
-        <section id="documentation" data-reveal style="position:relative;padding:56px 22px 44px">
+        <section id="m-documentation" data-reveal style="position:relative;padding:56px 22px 44px">
           <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.28em;color:rgba(255,255,255,.4);margin-bottom:10px">[ DOCUMENTATION ]</div>
           <h2 style="margin:0 0 22px;font-size:32px;font-weight:800;letter-spacing:-.035em;color:#fff;line-height:1.05">Build with CROW.</h2>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
@@ -673,7 +676,7 @@ export function MobileLanding() {
             ))}
           </div>
           <div style="padding:24px 30px 34px;animation:crowm-linkIn .5s cubic-bezier(.2,.8,.2,1) .34s both">
-            <button type="button" class="tapsc" onClick={() => openChat('What is CROW and what can it do?')} style="width:100%;display:flex;align-items:center;justify-content:center;gap:8px;font-size:16px;font-weight:600;color:#000;background:#fff;border:none;border-radius:980px;padding:16px;cursor:pointer">
+            <button type="button" class="tapsc" onClick={() => openChat('What is CROW and what can it do?')} style="width:100%;display:flex;align-items:center;justify-content:center;gap:8px;font-size:16px;font-weight:600;color:#fff;background:linear-gradient(155deg,#A855F7,#7C3AED);border:none;border-radius:980px;padding:16px;cursor:pointer">
               Try CROW
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12" />
@@ -724,7 +727,7 @@ export function MobileLanding() {
 
         <form onSubmit={submitChat} style="flex:none;display:flex;align-items:center;gap:8px;padding:12px 14px calc(22px + env(safe-area-inset-bottom));border-top:1px solid rgba(255,255,255,.08);background:rgba(12,12,16,.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)">
           <input type="text" value={chatInput} onInput={e => setChatInput((e.target as HTMLInputElement).value)} placeholder="Ask a question..." autocomplete="off" enterkeyhint="send" style="flex:1;min-width:0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:980px;padding:12px 16px;color:#fff;font-family:'Sora',sans-serif;font-size:14px;outline:none" />
-          <button type="submit" class="tapsc" aria-label="Send" style="flex:none;width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(155deg,var(--accent,#A855F7),#7C3AED);box-shadow:0 6px 16px rgba(124,58,237,.45)">
+          <button type="submit" class="tapsc" aria-label="Send" style="flex:none;width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(155deg,#6D28D9,#5B21B6);box-shadow:0 6px 16px rgba(91,33,182,.5)">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="12" y1="19" x2="12" y2="5" />
               <polyline points="5 12 12 5 19 12" />

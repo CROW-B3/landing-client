@@ -1,0 +1,22 @@
+diff --git a/dist/components/backgrounds/GlobeRenderer.js b/dist/components/backgrounds/GlobeRenderer.js
+index 66b7e897031aeac96f992a17e83f643241f70945..af4d26a4913e8834332b576a1d8213d2cb6d2468 100644
+--- a/dist/components/backgrounds/GlobeRenderer.js
++++ b/dist/components/backgrounds/GlobeRenderer.js
+@@ -86,7 +86,7 @@ export default function GlobeRenderer({ points = [], size = 600 }) {
+         directionalLight.position.set(1, 1, 1);
+         scene.add(directionalLight);
+         const ORBIT_RADIUS = 115;
+-        const ORBIT_SPEED = 0.003;
++        const ORBIT_SPEED = 0.0018;
+         const globeMaterial = new THREE.MeshPhongMaterial({
+             color: new THREE.Color(1.1, 0.6, 0.85),
+             emissive: new THREE.Color(0x1a0a30),
+@@ -161,7 +161,7 @@ export default function GlobeRenderer({ points = [], size = 600 }) {
+         scene.rotation.x = 0;
+         let orbitAngles = orbitConfigs.map(config => config.startAngle);
+         const animate = () => {
+-            globe.rotation.y += 0.003;
++            globe.rotation.y += 0.0018;
+             orbitRings.forEach((ring, index) => {
+                 const material = ring.material;
+                 const targetOpacity = visiblePointsRef.current.has(index) ? 0.3 : 0;

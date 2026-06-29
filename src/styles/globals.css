@@ -237,3 +237,33 @@ body {
     }
   }
 }
+
+/*
+ * AnimatedBackground (ui-kit) anchors its glows to the right edge with FIXED
+ * pixel sizes (primary 1700x900, secondary 500x400). On a wide desktop those
+ * glows only cover the right third -> black screen + purple orb on the right.
+ * On a narrow phone the same huge glows engulf the whole width, washing the
+ * hero white-purple. Scale the glows down on small viewports so the orb stays
+ * a contained purple orb hugging the right edge, matching the desktop look.
+ */
+@media (max-width: 1023px) {
+  .glow-primary {
+    width: 760px !important;
+    height: 760px !important;
+  }
+  .glow-secondary {
+    width: 320px !important;
+    height: 320px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .glow-primary {
+    width: 360px !important;
+    height: 360px !important;
+  }
+  .glow-secondary {
+    width: 160px !important;
+    height: 160px !important;
+  }
+}

@@ -2,18 +2,18 @@ export function Footer() {
   return (
     <footer class="relative w-full px-4 sm:px-6 md:px-8 py-8 sm:py-10 md:py-12 overflow-hidden">
       <div class="max-w-5xl mx-auto relative z-10">
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 sm:gap-8 mb-6 sm:mb-8">
-          <div class="flex items-start justify-center sm:justify-start md:col-span-1">
+        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 gap-x-6 gap-y-8 sm:gap-8 mb-6 sm:mb-8">
+          <div class="col-span-2 flex items-center justify-center sm:justify-start md:col-span-1">
             <img
               src="/favicon.webp"
               alt="CROW Logo"
-              width="80"
-              height="80"
+              width="72"
+              height="72"
               class="object-contain sm:w-[100px] sm:h-[100px]"
             />
           </div>
 
-          <div class="text-center sm:text-left">
+          <div class="text-left">
             <h3 class="text-white font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Navigation</h3>
             <ul class="space-y-2">
               <li>
@@ -34,7 +34,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div class="text-center sm:text-left">
+          <div class="text-left">
             <h3 class="text-white font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Resources</h3>
             <ul class="space-y-2">
               <li>
@@ -60,16 +60,16 @@ export function Footer() {
             </ul>
           </div>
 
-          <div class="text-center sm:text-left">
+          <div class="text-left">
             <h3 class="text-white font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Contact Us</h3>
             <a href="mailto:b3@bbyb.dev" class="text-white/60 hover:text-white transition-colors text-xs sm:text-sm break-all">
               Email: b3@bbyb.dev
             </a>
           </div>
 
-          <div class="text-center sm:text-left">
+          <div class="text-left">
             <h3 class="text-white font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Connect</h3>
-            <div class="flex gap-3 sm:gap-4 justify-center sm:justify-start">
+            <div class="flex gap-3 sm:gap-4 justify-start">
               <a
                 href="https://www.instagram.com/crow_b3?igsh=N2xldXY3aGN0N3Jr"
                 target="_blank"

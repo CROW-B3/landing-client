@@ -268,7 +268,7 @@ export function MobileLanding() {
     { img: '/api.webp', title: 'API', desc: 'Endpoints for interactions and summaries, ready to plug into any dashboard or automation.', q: 'How do I get started with the CROW API?', imgStyle: 'max-width:72%;max-height:74%;object-fit:contain;filter:invert(1) brightness(1.5);opacity:.72' },
     { img: '/chat.webp', title: 'Chat', desc: 'An AI analyst that explains behaviour, spots spikes, compares stores, and answers product questions clearly.', q: 'What can the CROW chat analyst do for me?', imgStyle: 'max-width:72%;max-height:70%;object-fit:contain;filter:invert(1) brightness(1.5);opacity:.72' },
   ]
-  const segOn = 'border:none;cursor:pointer;font-size:13px;font-weight:600;padding:8px 16px;border-radius:980px;font-family:\'Sora\',sans-serif;color:#fff;background:linear-gradient(155deg,var(--accent,#A855F7),#7C3AED);box-shadow:0 4px 12px rgba(124,58,237,.4)'
+  const segOn = 'border:none;cursor:pointer;font-size:13px;font-weight:600;padding:8px 16px;border-radius:980px;font-family:\'Sora\',sans-serif;color:#fff;background:linear-gradient(155deg,#6D28D9,#5B21B6);box-shadow:0 4px 12px rgba(91,33,182,.45)'
   const segOff = 'border:none;cursor:pointer;font-size:13px;font-weight:600;padding:8px 16px;border-radius:980px;font-family:\'Sora\',sans-serif;color:rgba(255,255,255,.6);background:transparent'
 
   const checkIcon = (
@@ -492,7 +492,7 @@ export function MobileLanding() {
             {/* CCTV — most popular (badge lives in a non-clipping wrapper so the
                 card's overflow:hidden shimmer doesn't cut it off) */}
             <div style="position:relative;margin-top:4px">
-              <span style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.16em;color:#fff;background:linear-gradient(155deg,var(--accent,#A855F7),#7C3AED);padding:5px 12px;border-radius:980px;white-space:nowrap;box-shadow:0 6px 16px rgba(124,58,237,.45);z-index:5">MOST POPULAR</span>
+              <span style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.16em;color:#fff;background:linear-gradient(155deg,#6D28D9,#5B21B6);padding:5px 12px;border-radius:980px;white-space:nowrap;box-shadow:0 6px 16px rgba(91,33,182,.45);z-index:5">MOST POPULAR</span>
               <div class="spot shine" style="position:relative;border:1px solid var(--accent,#A855F7);border-radius:22px;background:linear-gradient(180deg,rgba(168,85,247,.13),rgba(255,255,255,.03));padding:22px;box-shadow:0 0 40px rgba(168,85,247,.22)">
                 <div style="display:flex;align-items:center;gap:12px;position:relative;z-index:1">
                   <div style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(168,85,247,.18);border:1px solid rgba(168,85,247,.32);color:#E7D8FF">

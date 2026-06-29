@@ -8,7 +8,9 @@ export function PricingSection() {
   const [billingPeriod, setBillingPeriod] = useState<BillingPeriod>('monthly')
 
   const currentPricing = pricingData[billingPeriod]
-  const period = billingPeriod === 'monthly' ? 'mo' : 'yr'
+  // Annual is the per-module monthly-equivalent ($50/mo billed yearly), so the
+  // unit is always /mo — matching the auth checkout. Never render /yr.
+  const period = 'mo'
 
   return (
     <section id="pricing" className="relative min-h-screen w-full flex items-center justify-center px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-20">
@@ -30,7 +32,7 @@ export function PricingSection() {
               />
               {billingPeriod === 'yearly' && (
                 <span className="text-[10px] font-medium bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full whitespace-nowrap animate-scale-pulse">
-                  Save 20%
+                  Save 17%
                 </span>
               )}
             </div>

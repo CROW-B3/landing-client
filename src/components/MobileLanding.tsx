@@ -11,9 +11,11 @@ import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
 type Role = 'user' | 'assistant'
 interface Msg { role: Role, content: string, streaming?: boolean }
 
-const FEAT_CCTV = ['5 Camera Streams', 'Heatmap Generation', 'Footfall Analytics', '30-Day Retention', 'API Integration']
-const FEAT_WEB = ['Unlimited Sessions', 'Rage Click Detection', 'Funnel Optimization AI', 'Real-time User Replay', 'Advanced API Access']
-const FEAT_SOCIAL = ['5 Social Channels', 'Keyword Tracking', 'Sentiment AI Analysis', 'Weekly Digests', 'Competitor Monitoring']
+// Feature lists mirror auth-client/src/config/plans.tsx (the pricing source of
+// truth): 1M interactions + 1M patterns included, then the module capabilities.
+const FEAT_WEB = ['1,000,000 interactions / month', '1,000,000 patterns / month', 'SDK tracking', 'Funnels & drop-off', 'Session evidence', 'Event API']
+const FEAT_CCTV = ['1,000,000 interactions / month', '1,000,000 patterns / month', 'Sites & camera groups', 'Agent ingest', 'Footfall & queues', 'Heatmaps']
+const FEAT_SOCIAL = ['1,000,000 interactions / month', '1,000,000 patterns / month', 'Keyword tracking', 'Sentiment & spikes', 'Source selection', 'Regional filters']
 
 function answerFor(q: string): string {
   const s = (q || '').toLowerCase()
@@ -53,10 +55,13 @@ export function MobileLanding() {
   const reduceMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
   const monthly = billing === 'monthly'
-  const period = monthly ? 'mo' : 'yr'
-  const priceCctv = monthly ? 29 : 24
-  const priceWeb = monthly ? 49 : 39
-  const priceSocial = monthly ? 39 : 29
+  // Flat per-module price from the auth source of truth ($60/mo, $50/mo billed
+  // annually). Always a /mo figure — annual just lowers the monthly rate.
+  const period = 'mo'
+  const price = monthly ? 60 : 50
+  const priceCctv = price
+  const priceWeb = price
+  const priceSocial = price
 
   const scrollChat = useCallback(() => {
     requestAnimationFrame(() => {
@@ -428,30 +433,31 @@ export function MobileLanding() {
               <button type="button" onClick={() => setBilling('yearly')} style={!monthly ? segOn : segOff}>Yearly</button>
             </div>
             {!monthly && (
-              <span style="font-size:11px;font-weight:600;color:#CDAAFF;background:rgba(168,85,247,.18);border:1px solid rgba(168,85,247,.3);padding:5px 10px;border-radius:980px;animation:crowm-revealUp .3s ease-out both">Save 20%</span>
+              <span style="font-size:11px;font-weight:600;color:#CDAAFF;background:rgba(168,85,247,.18);border:1px solid rgba(168,85,247,.3);padding:5px 10px;border-radius:980px;animation:crowm-revealUp .3s ease-out both">Save 17%</span>
             )}
           </div>
 
           <div style="display:flex;flex-direction:column;gap:16px">
-            {/* CCTV */}
+            {/* WEB */}
             <div class="spot" style="position:relative;border:1px solid rgba(255,255,255,.09);border-radius:22px;background:rgba(255,255,255,.035);padding:22px">
               <div style="display:flex;align-items:center;gap:12px;position:relative;z-index:1">
                 <div style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);color:#D8C2FF">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="m22 8-6 4 6 4V8Z" />
-                    <rect x="2" y="6" width="14" height="12" rx="2" />
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M2 12h20" />
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z" />
                   </svg>
                 </div>
                 <div>
-                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;color:rgba(255,255,255,.4)">OBSERVATION</div>
-                  <div style="font-size:20px;font-weight:600;color:#fff;margin-top:2px">CCTV</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;color:rgba(255,255,255,.4)">DIGITAL</div>
+                  <div style="font-size:20px;font-weight:600;color:#fff;margin-top:2px">Web</div>
                 </div>
               </div>
-              <p style="margin:14px 0 0;font-size:13.5px;line-height:1.45;color:rgba(255,255,255,.55);position:relative;z-index:1">Physical space analytics and flow tracking.</p>
+              <p style="margin:14px 0 0;font-size:13.5px;line-height:1.45;color:rgba(255,255,255,.55);position:relative;z-index:1">Digital journey + interaction capture.</p>
               <div style="display:flex;align-items:flex-end;gap:4px;margin-top:16px;position:relative;z-index:1">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:38px;font-weight:600;color:#fff;line-height:1">
                   $
-                  {priceCctv}
+                  {priceWeb}
                 </span>
                 <span style="font-size:14px;color:rgba(255,255,255,.45);margin-bottom:6px">
                   /
@@ -460,17 +466,17 @@ export function MobileLanding() {
               </div>
               <div style="height:1px;background:rgba(255,255,255,.08);margin:18px 0;position:relative;z-index:1"></div>
               <div style="display:flex;flex-direction:column;gap:9px;position:relative;z-index:1">
-                {FEAT_CCTV.map(f => (
+                {FEAT_WEB.map(f => (
                   <div key={f} style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:rgba(255,255,255,.82)">
                     {checkIcon}
                     <span>{f}</span>
                   </div>
                 ))}
               </div>
-              <button type="button" class="tapsc" onClick={() => openChat('What\'s included in the CROW CCTV plan?')} style="margin-top:20px;position:relative;z-index:1;width:100%;font-size:14px;font-weight:600;color:#fff;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);border-radius:980px;padding:13px;cursor:pointer">Get started</button>
+              <button type="button" class="tapsc" onClick={() => openChat('Tell me about the CROW Web plan.')} style="margin-top:20px;position:relative;z-index:1;width:100%;font-size:14px;font-weight:600;color:#fff;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);border-radius:980px;padding:13px;cursor:pointer">Get started</button>
             </div>
 
-            {/* WEB — most popular (badge lives in a non-clipping wrapper so the
+            {/* CCTV — most popular (badge lives in a non-clipping wrapper so the
                 card's overflow:hidden shimmer doesn't cut it off) */}
             <div style="position:relative;margin-top:4px">
               <span style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.16em;color:#fff;background:linear-gradient(155deg,var(--accent,#A855F7),#7C3AED);padding:5px 12px;border-radius:980px;white-space:nowrap;box-shadow:0 6px 16px rgba(124,58,237,.45);z-index:5">MOST POPULAR</span>
@@ -478,21 +484,20 @@ export function MobileLanding() {
                 <div style="display:flex;align-items:center;gap:12px;position:relative;z-index:1">
                   <div style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(168,85,247,.18);border:1px solid rgba(168,85,247,.32);color:#E7D8FF">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                      <circle cx="12" cy="12" r="10" />
-                      <path d="M2 12h20" />
-                      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z" />
+                      <path d="m22 8-6 4 6 4V8Z" />
+                      <rect x="2" y="6" width="14" height="12" rx="2" />
                     </svg>
                   </div>
                   <div>
-                    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;color:#CDAAFF">DIGITAL</div>
-                    <div style="font-size:20px;font-weight:600;color:#fff;margin-top:2px">Web</div>
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;color:#CDAAFF">OBSERVATION</div>
+                    <div style="font-size:20px;font-weight:600;color:#fff;margin-top:2px">CCTV</div>
                   </div>
                 </div>
-                <p style="margin:14px 0 0;font-size:13.5px;line-height:1.45;color:rgba(255,255,255,.62);position:relative;z-index:1">Full user journey and behavior modeling.</p>
+                <p style="margin:14px 0 0;font-size:13.5px;line-height:1.45;color:rgba(255,255,255,.62);position:relative;z-index:1">Physical behavior + camera signals.</p>
                 <div style="display:flex;align-items:flex-end;gap:4px;margin-top:16px;position:relative;z-index:1">
                   <span style="font-family:'JetBrains Mono',monospace;font-size:38px;font-weight:600;color:#fff;line-height:1">
                     $
-                    {priceWeb}
+                    {priceCctv}
                   </span>
                   <span style="font-size:14px;color:rgba(255,255,255,.5);margin-bottom:6px">
                     /
@@ -501,14 +506,14 @@ export function MobileLanding() {
                 </div>
                 <div style="height:1px;background:rgba(255,255,255,.1);margin:18px 0;position:relative;z-index:1"></div>
                 <div style="display:flex;flex-direction:column;gap:9px;position:relative;z-index:1">
-                  {FEAT_WEB.map(f => (
+                  {FEAT_CCTV.map(f => (
                     <div key={f} style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#fff">
                       {checkIcon}
                       <span>{f}</span>
                     </div>
                   ))}
                 </div>
-                <button type="button" class="tapsc" onClick={() => openChat('Tell me about the CROW Web plan.')} style="margin-top:20px;position:relative;z-index:4;width:100%;font-size:14px;font-weight:600;color:#fff;background:linear-gradient(155deg,var(--accent,#A855F7),#7C3AED);border:none;border-radius:980px;padding:14px;cursor:pointer;box-shadow:0 8px 22px rgba(124,58,237,.45)">Get started</button>
+                <button type="button" class="tapsc" onClick={() => openChat('What\'s included in the CROW CCTV plan?')} style="margin-top:20px;position:relative;z-index:4;width:100%;font-size:14px;font-weight:600;color:#fff;background:linear-gradient(155deg,var(--accent,#A855F7),#7C3AED);border:none;border-radius:980px;padding:14px;cursor:pointer;box-shadow:0 8px 22px rgba(124,58,237,.45)">Get started</button>
               </div>
             </div>
 

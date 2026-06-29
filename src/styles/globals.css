@@ -248,22 +248,22 @@ body {
  */
 @media (max-width: 1023px) {
   .glow-primary {
-    width: 760px !important;
-    height: 760px !important;
+    width: 560px !important;
+    height: 560px !important;
   }
   .glow-secondary {
-    width: 320px !important;
-    height: 320px !important;
+    width: 240px !important;
+    height: 240px !important;
   }
 }
 
 @media (max-width: 767px) {
   .glow-primary {
-    width: 360px !important;
-    height: 360px !important;
+    width: 340px !important;
+    height: 340px !important;
   }
   .glow-secondary {
-    width: 160px !important;
-    height: 160px !important;
+    width: 150px !important;
+    height: 150px !important;
   }
 }

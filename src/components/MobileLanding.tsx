@@ -1,5 +1,6 @@
 import { Globe } from '@b3-crow/ui-kit'
 import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
+import { askCrow } from '@/lib/api/chat'
 
 /*
  * Mobile-only landing redesign, ported from the Claude Design handoff
@@ -99,10 +100,17 @@ export function MobileLanding() {
     }, 16)
   }, [scrollChat])
 
-  const respond = useCallback((q: string) => {
-    const txt = answerFor(q)
-    const d = 800 + Math.random() * 550
-    setTimeout(() => streamIn(txt), d)
+  // Ask the live model (Workers AI via /api/chat); fall back to the built-in
+  // canned answer if the backend is unreachable, so a demo never dead-ends.
+  const respond = useCallback(async (history: Msg[]) => {
+    const lastUser = history.filter(m => m.role === 'user').pop()?.content ?? ''
+    try {
+      const text = await askCrow(history.map(m => ({ role: m.role, content: m.content })))
+      streamIn(text)
+    }
+    catch {
+      streamIn(answerFor(lastUser))
+    }
   }, [streamIn])
 
   const openChat = useCallback((q: string) => {
@@ -112,10 +120,11 @@ export function MobileLanding() {
     setMenuOpen(false)
     setHeroInput('')
     setScreen('chat')
-    setMessages([{ role: 'user', content: query }])
+    const next: Msg[] = [{ role: 'user', content: query }]
+    setMessages(next)
     setThinking(true)
     scrollChat()
-    respond(query)
+    respond(next)
   }, [respond, scrollChat])
 
   const submitHero = useCallback((e: Event) => {
@@ -126,14 +135,15 @@ export function MobileLanding() {
   const submitChat = useCallback((e: Event) => {
     e.preventDefault()
     const q = chatInput.trim()
-    if (!q || thinking)
+    if (!q || thinking || typerRef.current)
       return
-    setMessages(m => m.concat([{ role: 'user', content: q }]))
+    const next = messages.concat([{ role: 'user', content: q }])
+    setMessages(next)
     setChatInput('')
     setThinking(true)
     scrollChat()
-    respond(q)
-  }, [chatInput, thinking, respond, scrollChat])
+    respond(next)
+  }, [chatInput, thinking, messages, respond, scrollChat])
 
   const go = useCallback((id: string) => {
     setMenuOpen(false)

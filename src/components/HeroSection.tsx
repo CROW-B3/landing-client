@@ -1,25 +1,17 @@
 import { HeroText, InputField, Subtitle } from '@b3-crow/ui-kit'
 import { ChevronDown } from 'lucide-preact'
 import { useState } from 'react'
-import { createSession, sendMessage } from '@/lib/api/qna'
 
 export function HeroSection() {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const handleSubmit = async (query: string) => {
-    if (!query.trim() || isSubmitting)
+  // Hand the question to the chat page, which runs it against /api/chat.
+  const handleSubmit = (query: string) => {
+    const q = query.trim()
+    if (!q || isSubmitting)
       return
-
     setIsSubmitting(true)
-
-    try {
-      const session = await createSession()
-      await sendMessage({ sessionId: session.id, query: query.trim() })
-      window.location.href = `/ask/${session.id}`
-    }
-    catch {
-      setIsSubmitting(false)
-    }
+    window.location.href = `/ask/c?q=${encodeURIComponent(q)}`
   }
 
   return (

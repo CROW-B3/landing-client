@@ -2,7 +2,6 @@ import { AnimatedBackground } from '@b3-crow/ui-kit'
 import { Send } from 'lucide-preact'
 import { useRef, useState } from 'react'
 import { Navigation } from '@/components/Navigation'
-import { createSession, sendMessage } from '@/lib/api/qna'
 
 function LoadingDots() {
   return (
@@ -21,21 +20,13 @@ export function AskPage() {
   const formRef = useRef<HTMLFormElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const handleSubmit = async (e: Event) => {
+  const handleSubmit = (e: Event) => {
     e.preventDefault()
-    if (!input.trim() || isCreating)
+    const q = input.trim()
+    if (!q || isCreating)
       return
-
     setIsCreating(true)
-
-    try {
-      const session = await createSession()
-      await sendMessage({ sessionId: session.id, query: input.trim() })
-      window.location.href = `/ask/${session.id}`
-    }
-    catch {
-      setIsCreating(false)
-    }
+    window.location.href = `/ask/c?q=${encodeURIComponent(q)}`
   }
 
   return (

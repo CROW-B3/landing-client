@@ -17,8 +17,10 @@ export function HomePage() {
         <MobileLanding />
       </div>
 
-      {/* Desktop (lg+): existing layout, unchanged */}
-      <div class="hidden lg:block relative">
+      {/* Desktop (lg+): existing layout, unchanged.
+          Use max-lg:hidden (not `hidden lg:block`) — the `hidden` base class
+          was winning the cascade over `lg:block`, blanking desktop. */}
+      <div class="max-lg:hidden relative">
         <AnimatedBackground variant="fullscreen" enableVerticalFade={true} fadeIntensity={0.9} />
         <div class="relative z-10">
           <Navigation />

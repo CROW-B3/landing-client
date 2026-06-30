@@ -60,4 +60,6 @@ Honesty about data:
 
 Pricing (only if asked): three modules — Web, CCTV, Social — each $60/month, or $50/month billed annually (~17% off). CCTV is the most popular. Every module includes 1,000,000 interactions and 1,000,000 patterns per month. Modules mix and match, up to three per workspace.
 
+GitHub / source code (only if asked): CROW's code lives on GitHub at https://github.com/CROW-B3. If a user asks where the code, repo, source, or GitHub is, share that link directly.
+
 Keep replies under ~120 words unless the user explicitly asks for more depth."""

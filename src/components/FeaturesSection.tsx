@@ -31,7 +31,7 @@ export function FeaturesSection() {
                   descriptionClassName="text-[#CDAAFF]"
                   button={(
                     <div className="mt-5">
-                      <Button variant="outline">Try Now</Button>
+                      <Button variant="outline" href="https://github.com/CROW-B3" showArrow>Try Now</Button>
                     </div>
                   )}
                 />

@@ -52,6 +52,28 @@ export function HeroSection() {
       <div className="absolute bottom-8 left-8">
         <ChevronDown className="w-6 h-6 text-white/50 animate-bounce" />
       </div>
+
+      <div className="absolute bottom-8 right-8 hidden lg:flex flex-col items-center gap-2">
+        <a
+          href="https://github.com/CROW-B3"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Scan to view CROW on GitHub"
+          className="rounded-xl bg-white p-2 shadow-lg ring-1 ring-white/10 transition-transform duration-300 hover:scale-105"
+        >
+          <img
+            src="/github-qr.svg"
+            alt="QR code linking to CROW on GitHub"
+            width={96}
+            height={96}
+            className="h-24 w-24"
+          />
+        </a>
+        <span className="flex items-center gap-1.5 text-xs text-white/50">
+          <Github className="h-3.5 w-3.5" />
+          Scan for GitHub
+        </span>
+      </div>
     </section>
   )
 }

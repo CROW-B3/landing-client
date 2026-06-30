@@ -1,5 +1,5 @@
 import { HeroText, InputField, Subtitle } from '@b3-crow/ui-kit'
-import { ChevronDown } from 'lucide-preact'
+import { ChevronDown, Github } from 'lucide-preact'
 import { useState } from 'react'
 
 export function HeroSection() {
@@ -26,6 +26,16 @@ export function HeroSection() {
           onSubmit={handleSubmit}
           disabled={isSubmitting}
         />
+
+        <a
+          href="https://github.com/CROW-B3"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 text-sm text-white/40 transition-colors duration-300 hover:text-white"
+        >
+          <Github className="w-4 h-4" />
+          <span>View CROW on GitHub</span>
+        </a>
       </div>
 
       <div className="absolute bottom-24 px-4">

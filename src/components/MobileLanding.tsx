@@ -683,6 +683,12 @@ export function MobileLanding() {
                 <polyline points="12 5 19 12 12 19" />
               </svg>
             </button>
+            <a href="https://github.com/CROW-B3" target="_blank" rel="noopener noreferrer" class="tapsc" style="margin-top:14px;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:500;color:rgba(255,255,255,.6);text-decoration:none;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:980px;padding:13px">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.1.82-.26.82-.58v-2c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57A12 12 0 0 0 12 .5Z" />
+              </svg>
+              <span>View CROW on GitHub</span>
+            </a>
           </div>
         </div>
       )}
